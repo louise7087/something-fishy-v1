@@ -14,8 +14,7 @@ public class CameraMovement : MonoBehaviour
     [SerializeField] private float maxOrthographicSize = 15f; 
     [SerializeField] InputActionReference zoom;
 
-    [Header("Player Reference")]
-    [SerializeField] private GameObject player;
+    private GameObject player;
 
 
 
@@ -25,6 +24,7 @@ public class CameraMovement : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        player = GameObject.FindGameObjectWithTag("Player");
     }
 
     // Update is called once per frame
