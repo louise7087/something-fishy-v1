@@ -31,6 +31,9 @@ public class PlayerMovement : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
+
+        // When player spawns in, enable the camera movement script
+        Camera.main.GetComponent<CameraMovement>().enabled = true;
     }
 
     private void FixedUpdate()
