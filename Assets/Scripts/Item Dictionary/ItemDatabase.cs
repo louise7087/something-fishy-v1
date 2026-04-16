@@ -21,10 +21,10 @@ public class ItemDatabase : ScriptableObject
     }
 }
 
-[CreateAssetMenu]
-public class ItemEntry : ScriptableObject
+[System.Serializable]
+public class ItemEntry
 {
     public string id;
-    public int cost;
+    public int value = 10;
     public GameObject prefab;
 }

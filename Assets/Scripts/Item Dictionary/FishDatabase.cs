@@ -25,6 +25,7 @@ public class FishDatabase : ScriptableObject
 public class FishEntry
 {
     public string id;
+    public int value = 10;
     public SpawnSeason season;
     public GameObject prefab;
 }
