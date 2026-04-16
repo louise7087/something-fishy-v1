@@ -1265,6 +1265,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 635013524739062362, guid: 01f90909d1180424292a084f7a7d6d6c, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.22
+      objectReference: {fileID: 0}
+    - target: {fileID: 635013524739062362, guid: 01f90909d1180424292a084f7a7d6d6c, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.268
+      objectReference: {fileID: 0}
     - target: {fileID: 2251506983071031958, guid: 01f90909d1180424292a084f7a7d6d6c, type: 3}
       propertyPath: m_Name
       value: Player
@@ -1276,6 +1284,10 @@ PrefabInstance:
     - target: {fileID: 3787881418195800066, guid: 01f90909d1180424292a084f7a7d6d6c, type: 3}
       propertyPath: m_FlipX
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4213455312384887369, guid: 01f90909d1180424292a084f7a7d6d6c, type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4213455312384887369, guid: 01f90909d1180424292a084f7a7d6d6c, type: 3}
       propertyPath: m_ActionEvents.Array.size
