@@ -767,7 +767,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 490feb163e0518a49a017ee008c3d22a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CameraMovement
-  movementInterpolationSpeed: 5
+  movementInterpolationSpeed: 2
   zoomInterpolationSpeed: 5
   minOrthographicSize: 2
   maxOrthographicSize: 15
