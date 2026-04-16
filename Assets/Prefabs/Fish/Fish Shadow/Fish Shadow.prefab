@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 5529234297454631500}
   - component: {fileID: 5861346133970462218}
   - component: {fileID: 2200148547604444181}
+  - component: {fileID: 2477769928704032796}
   m_Layer: 0
   m_Name: Fish Shadow
   m_TagString: Untagged
@@ -161,3 +162,15 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 0.16, y: 0.16}
   m_EdgeRadius: 0
+--- !u!114 &2477769928704032796
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6041923256478545641}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1ff6a0613de74aa4fac76bd5f8746d15, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::FishShadow

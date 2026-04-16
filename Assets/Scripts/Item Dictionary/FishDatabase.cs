@@ -1,4 +1,5 @@
 using NUnit.Framework;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -19,6 +20,15 @@ public class FishDatabase : ScriptableObject
     {
         return lookup[id];
     }
+
+    public FishEntry GetRandomFishFromSeason(Season season)
+    {
+        var possibleFish = items.Where(i => (int)i.season == (int)season || i.season == SpawnSeason.ALL).ToList(); // Gets all fish where seasons match
+
+        int randomIndex = UnityEngine.Random.Range(0, possibleFish.Count());
+
+        return possibleFish[randomIndex];
+    }
 }
 
 [System.Serializable]
@@ -32,9 +42,9 @@ public class FishEntry
 
 public enum SpawnSeason
 {
-    ALL,
     SPRING,
     SUMMER,
     AUTUMN,
-    WINTER
+    WINTER,
+    ALL
 }
