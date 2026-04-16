@@ -16,7 +16,7 @@ public class CameraMovement : MonoBehaviour
 
     private GameObject player;
 
-
+    private Camera camera;
 
     private float targetOrthographicSize;
 
@@ -36,15 +36,16 @@ public class CameraMovement : MonoBehaviour
             targetOrthographicSize = Mathf.Clamp(targetOrthographicSize - Mathf.Sign(scroll), minOrthographicSize, maxOrthographicSize);
         }
 
-        if(!Mathf.Approximately(Camera.main.orthographicSize, targetOrthographicSize))
+        if(!Mathf.Approximately(camera.orthographicSize, targetOrthographicSize))
         {
-            Camera.main.orthographicSize = Mathf.Lerp(Camera.main.orthographicSize, targetOrthographicSize, zoomInterpolationSpeed * Time.deltaTime);
+            camera.orthographicSize = Mathf.Lerp(camera.orthographicSize, targetOrthographicSize, zoomInterpolationSpeed * Time.deltaTime);
         }
     }
 
     private void Awake()
     {
-        targetOrthographicSize = Camera.main.orthographicSize;
+        camera = GetComponent<Camera>();
+        targetOrthographicSize = camera.orthographicSize;
     }
 
     private void LateUpdate()
