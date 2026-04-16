@@ -21,16 +21,17 @@ public class FishDatabase : ScriptableObject
     }
 }
 
-[CreateAssetMenu]
-public class FishEntry : ScriptableObject
+[System.Serializable]
+public class FishEntry
 {
     public string id;
-    public Season season;
+    public SpawnSeason season;
     public GameObject prefab;
 }
 
-public enum Season
+public enum SpawnSeason
 {
+    ALL,
     SPRING,
     SUMMER,
     AUTUMN,
