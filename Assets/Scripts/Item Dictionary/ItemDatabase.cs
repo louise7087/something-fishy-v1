@@ -25,5 +25,6 @@ public class ItemDatabase : ScriptableObject
 public class ItemEntry : ScriptableObject
 {
     public string id;
+    public int cost;
     public GameObject prefab;
 }
