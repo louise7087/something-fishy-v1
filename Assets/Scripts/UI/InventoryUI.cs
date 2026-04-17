@@ -15,6 +15,8 @@ public class InventoryUI : MonoBehaviour
 
     private Image[] imageSlots;
 
+    private Label[] textSlots;
+
     private bool isOpen;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -32,22 +34,25 @@ public class InventoryUI : MonoBehaviour
 
     private void RefreshInventory()
     {
-        stacks = inventory.GetItems();
-
         var root = uiDocument.rootVisualElement;
 
         imageSlots = new Image[inventory.GetCapacity()];
+        textSlots = new Label[inventory.GetCapacity()];
 
         for (int i = 0; i < imageSlots.Length; i++)
         {
             imageSlots[i] = root.Q<Image>($"inventory-slot-image-{i}");
+            textSlots[i] = root.Q<Label>($"inventory-slot-text-{i}");
         }
+
+        stacks = inventory.GetItems();
 
         foreach(ItemStack stack in stacks)
         {
             int position = stack.position;
 
             imageSlots[position].style.backgroundImage = new StyleBackground(stack.item.prefab.GetComponent<SpriteRenderer>().sprite);
+            textSlots[position].text = stack.amount.ToString();
         }
     }
     
