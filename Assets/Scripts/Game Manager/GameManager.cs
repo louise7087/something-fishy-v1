@@ -3,6 +3,8 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     [SerializeField] private Season currentSeason = Season.SPRING;
+    [SerializeField] private GameObject playerPrefab;
+
     private GameObject player;
 
     private DataManager dataManager;
@@ -25,15 +27,6 @@ public class GameManager : MonoBehaviour
         return currentSeason;
     }
 
-    public void SetPlayer(GameObject player)
-    {
-        // Player script calls this method once spawned in
-        this.player = player;
-        dataManager.SetPlayer(player);
-
-        dataManager.Load();
-    }
-
     public GameObject GetPlayer()
     {
         return player;
@@ -52,6 +45,14 @@ public class GameManager : MonoBehaviour
     private void OnApplicationQuit()
     {
         dataManager.Save();
+    }
+
+    public void StartGame()
+    {
+        // Called when new game / load game button is pressed
+        player = Instantiate(playerPrefab);
+        dataManager.SetPlayer(player);
+        dataManager.Load();
     }
 }
 
