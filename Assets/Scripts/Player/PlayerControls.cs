@@ -39,6 +39,9 @@ public class PlayerControls : MonoBehaviour
         inventory = GetComponent<Inventory>();
         mainCamera = Camera.main;
 
+        // Set player in game manager
+        GameObject.FindWithTag("GameManager").GetComponent<GameManager>().SetPlayer(gameObject);
+
         // When player spawns in, enable the camera movement script
         mainCamera.GetComponent<CameraMovement>().enabled = true;
 
@@ -47,35 +50,40 @@ public class PlayerControls : MonoBehaviour
         inventory.EquipItem("rod.rustline");
     }
 
-    private void FixedUpdate()
+    private void Update()
     {
-        Vector2 input = move.action.ReadValue<Vector2>();
-        MovePlayer(input);
-        SetAnimation();
-
-        if(fire.action.WasPressedThisFrame())
+        if (fire.action.WasPressedThisFrame())
         {
             Fire();
         }
     }
 
+    private void FixedUpdate()
+    {
+        Vector2 input = move.action.ReadValue<Vector2>();
+        MovePlayer(input);
+        SetAnimation();
+    }
+
     private void Fire()
     {
-        Debug.Log("FIRE");
+        Debug.Log("Fired");
 
         // Called when player fires
         if(inventory.GetEquippedItem() is RodEntry)
         {
             // Player has equipped rod
-            Vector2 mousePosition = Mouse.current.position.ReadValue();
-            Ray ray = mainCamera.ScreenPointToRay(mousePosition);
+            Vector2 mousePosition = mainCamera.ScreenToWorldPoint(Mouse.current.position.ReadValue());
 
-            if(Physics.Raycast(ray, out RaycastHit hit))
+            RaycastHit2D hit = Physics2D.Raycast(mousePosition, Vector2.zero);
+
+            if(hit.collider != null)
             {
-                if(hit.collider.CompareTag("FishShadow"))
+                // We hit something
+                if (hit.collider.CompareTag("FishShadow"))
                 {
                     // Player hit fish shadow
-                    Debug.Log("Hit Fish Shadow");
+                    hit.collider.GetComponent<FishShadow>().Catch();
                 }
             }
         }

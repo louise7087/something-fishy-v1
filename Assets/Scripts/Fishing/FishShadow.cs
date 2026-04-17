@@ -32,10 +32,20 @@ public class FishShadow : MonoBehaviour
         Debug.Log($"Assigned {fishEntry.id} to fish shadow!");
     }
 
-    public void Caught()
+    public void Catch()
+    {
+        // Change this later but for now:
+        Caught();
+    }
+
+    private void Caught()
     {
         // Method will be called when fish has been caught
+        Debug.Log($"Caught {fishEntry.id}");
         ItemStack stack = new ItemStack(fishEntry);
-        gameManager.GetPlayer().GetComponent<Container>().AddItem(stack);
+        gameManager.GetPlayer().GetComponent<Inventory>().AddItem(stack);
+
+        // Delete fish shadow
+        Destroy(gameObject);
     }
 }
