@@ -14,142 +14,212 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::FishDatabase
   items:
   - id: fish.parrot
-    value: 0
-    season: 0
+    value: 20
+    maxStack: 1
     prefab: {fileID: 7425973434950967351, guid: 78e4b8ef11bf94c489ac47d0fe7e219c, type: 3}
+    season: 0
+    Difficulty: 3
   - id: fish.mackerel
-    value: 0
-    season: 0
+    value: 5
+    maxStack: 1
     prefab: {fileID: 6556336693574479598, guid: 0420980ff93b94e49a1820e8c2c7fc50, type: 3}
+    season: 0
+    Difficulty: 1
   - id: fish.clownfish
-    value: 0
-    season: 0
+    value: 8
+    maxStack: 1
     prefab: {fileID: 6977363465311289132, guid: a0534c9a41c07004194ce169ffcdc674, type: 3}
+    season: 0
+    Difficulty: 1
   - id: fish.plaice
-    value: 0
-    season: 0
+    value: 10
+    maxStack: 1
     prefab: {fileID: 2416350211598633466, guid: 56087613da99e904ca82eeac4ad61fde, type: 3}
+    season: 0
+    Difficulty: 2
   - id: fish.silvereel
-    value: 0
-    season: 0
+    value: 15
+    maxStack: 1
     prefab: {fileID: 6342885091590615501, guid: 03cb62b4b1042e44d93f77a4306c9477, type: 3}
+    season: 0
+    Difficulty: 2
   - id: fish.seahorse
-    value: 0
-    season: 0
+    value: 12
+    maxStack: 1
     prefab: {fileID: 3817387490745350939, guid: 322ac237fe688694497692a11569b7ae, type: 3}
+    season: 0
+    Difficulty: 2
   - id: fish.lionfish
-    value: 0
-    season: 0
+    value: 25
+    maxStack: 1
     prefab: {fileID: 5737824455289110676, guid: c50e6353f0facab409a70fc774d13ad2, type: 3}
-  - id: fish.cowfish
-    value: 0
     season: 0
+    Difficulty: 4
+  - id: fish.cowfish
+    value: 10
+    maxStack: 1
     prefab: {fileID: 3557432326983300414, guid: 9119683ad383d3b489538e26b7f0cf76, type: 3}
+    season: 0
+    Difficulty: 2
   - id: fish.tuna
-    value: 0
-    season: 1
+    value: 15
+    maxStack: 1
     prefab: {fileID: 646449058684003449, guid: b218958d4ea37b34b9b7acd1095f1457, type: 3}
+    season: 1
+    Difficulty: 3
   - id: fish.bandedbutterflyfish
-    value: 0
-    season: 1
+    value: 13
+    maxStack: 1
     prefab: {fileID: 4559402820569807666, guid: e1b93b1239536794394f75f16b74dfd3, type: 3}
+    season: 1
+    Difficulty: 2
   - id: fish.atlanticbass
-    value: 0
-    season: 1
+    value: 25
+    maxStack: 1
     prefab: {fileID: 5770250390251273812, guid: 51b270b7d83ec3d4babc62b7574cc5f1, type: 3}
+    season: 1
+    Difficulty: 4
   - id: fish.bluetang
-    value: 0
-    season: 1
+    value: 5
+    maxStack: 1
     prefab: {fileID: 3406353810486387946, guid: 3629cfb0f65965148a1a7bb7b4e9df8c, type: 3}
+    season: 1
+    Difficulty: 1
   - id: fish.pollock
-    value: 0
-    season: 1
+    value: 8
+    maxStack: 1
     prefab: {fileID: 8807951744595679128, guid: 8d0d9208f2c3ff94ab169ff0c5bcffc8, type: 3}
+    season: 1
+    Difficulty: 1
   - id: fish.ballanwrasse
-    value: 0
-    season: 1
+    value: 15
+    maxStack: 1
     prefab: {fileID: 6882464991245428160, guid: e2ee6263022e27346ba5ee0cbb0ed20e, type: 3}
+    season: 1
+    Difficulty: 3
   - id: fish.weaver
-    value: 0
-    season: 1
+    value: 5
+    maxStack: 1
     prefab: {fileID: 2459310890065183381, guid: af07efeb68ef7c847b7cd9caff600a86, type: 3}
+    season: 1
+    Difficulty: 1
   - id: fish.bream
-    value: 0
-    season: 1
+    value: 5
+    maxStack: 1
     prefab: {fileID: 5104418503420899263, guid: d6b0754113a98c14b9678c50b9f2e987, type: 3}
-  - id: fish.pufferfish
-    value: 0
     season: 1
+    Difficulty: 1
+  - id: fish.pufferfish
+    value: 20
+    maxStack: 1
     prefab: {fileID: 6301473946630696010, guid: eec1ec7b0256ad74f8eb342259cbabb2, type: 3}
+    season: 1
+    Difficulty: 4
   - id: fish.cod
-    value: 0
-    season: 2
+    value: 10
+    maxStack: 1
     prefab: {fileID: 7878240941487033905, guid: 21f4c0ad9127ac34fa7f52e4bb723d98, type: 3}
+    season: 2
+    Difficulty: 2
   - id: fish.dab
-    value: 0
-    season: 2
+    value: 8
+    maxStack: 1
     prefab: {fileID: 6594886011999412278, guid: b2343b9abeaf6ac4bb2440b1d4f6e47a, type: 3}
+    season: 2
+    Difficulty: 1
   - id: fish.flounder
-    value: 0
-    season: 2
+    value: 10
+    maxStack: 1
     prefab: {fileID: 5586524491635485801, guid: 8fd7b6a2cd2867243a74d910d8c02c1b, type: 3}
+    season: 2
+    Difficulty: 2
   - id: fish.whiting
-    value: 0
-    season: 2
+    value: 5
+    maxStack: 1
     prefab: {fileID: 5712324454314582395, guid: af9e04d72b2932844b37a9d5d870d9bb, type: 3}
+    season: 2
+    Difficulty: 1
   - id: fish.halibut
-    value: 0
-    season: 2
+    value: 20
+    maxStack: 1
     prefab: {fileID: 458887701512274171, guid: be9c1f96e74769842bc42f462510dc01, type: 3}
+    season: 2
+    Difficulty: 4
   - id: fish.herring
-    value: 0
-    season: 2
+    value: 8
+    maxStack: 1
     prefab: {fileID: 1758601393667813303, guid: 09dcf9faebb082a47a86a074dc652d81, type: 3}
-  - id: fish.stingray
-    value: 0
     season: 2
+    Difficulty: 1
+  - id: fish.stingray
+    value: 25
+    maxStack: 1
     prefab: {fileID: 1147930302317490192, guid: 2946ccb2c7205be41a902ef6c4d9b102, type: 3}
+    season: 2
+    Difficulty: 4
   - id: fish.wolfish
-    value: 0
-    season: 3
+    value: 20
+    maxStack: 1
     prefab: {fileID: 6659669729441155078, guid: 9162b6c17e0829d428d5281445edd045, type: 3}
+    season: 3
+    Difficulty: 3
   - id: fish.bonefish
-    value: 0
-    season: 3
+    value: 15
+    maxStack: 1
     prefab: {fileID: 8865836328629643673, guid: 3e50f20cb34d22942a7e1c87ab971deb, type: 3}
+    season: 3
+    Difficulty: 3
   - id: fish.cobia
-    value: 0
-    season: 3
+    value: 13
+    maxStack: 1
     prefab: {fileID: 6887353177316515679, guid: c9a10200e7b16fa4ca5afae8b4b4ff6f, type: 3}
+    season: 3
+    Difficulty: 2
   - id: fish.blackdrum
-    value: 0
-    season: 3
+    value: 18
+    maxStack: 1
     prefab: {fileID: 213114152127588760, guid: 21a79da9fcf983b4ab6399c42e27b90a, type: 3}
+    season: 3
+    Difficulty: 3
   - id: fish.blobfish
-    value: 0
-    season: 3
+    value: 5
+    maxStack: 1
     prefab: {fileID: 3299920377243085890, guid: 70318a98a6960e546af70e5e3c7088a6, type: 3}
-  - id: fish.pompano
-    value: 0
     season: 3
+    Difficulty: 1
+  - id: fish.pompano
+    value: 8
+    maxStack: 1
     prefab: {fileID: 6467327183320576726, guid: 849c40daf8d85204da5f7c53a8c547c3, type: 3}
+    season: 3
+    Difficulty: 1
   - id: fish.sardine
-    value: 0
-    season: 4
+    value: 3
+    maxStack: 1
     prefab: {fileID: 3723967101534534948, guid: 797f0f81d4614694f96bfb33c88a6d74, type: 3}
+    season: 4
+    Difficulty: 1
   - id: fish.angelfish
-    value: 0
-    season: 4
+    value: 8
+    maxStack: 1
     prefab: {fileID: 5873266241455072692, guid: a90171ff9a5d48c4c9f98f77ded29d8a, type: 3}
+    season: 4
+    Difficulty: 1
   - id: fish.redsnapper
-    value: 0
-    season: 4
+    value: 5
+    maxStack: 1
     prefab: {fileID: 6685508503539020891, guid: b6d7b9330cde0264d80c27addfbc354a, type: 3}
+    season: 4
+    Difficulty: 1
   - id: fish.salmon
-    value: 0
-    season: 4
+    value: 10
+    maxStack: 1
     prefab: {fileID: 2612130374618046400, guid: 3f8dbb84c7f622e4db08c52eb58dd58f, type: 3}
-  - id: fish.anglerfish
-    value: 0
     season: 4
+    Difficulty: 2
+  - id: fish.anglerfish
+    value: 30
+    maxStack: 1
     prefab: {fileID: 6480690540276823468, guid: e5030b20b67e9104cad6a4fb7c3d9d00, type: 3}
+    season: 4
+    Difficulty: 4
