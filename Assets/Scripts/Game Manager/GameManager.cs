@@ -3,12 +3,17 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     [SerializeField] private Season currentSeason = Season.SPRING;
+    [SerializeField] private GameObject playerPrefab;
+
     private GameObject player;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    private DataManager dataManager;
+    private ItemManager itemManager;
+
+    void Awake()
     {
-        
+        dataManager = GameObject.FindWithTag("DataManager").GetComponent<DataManager>();
+        itemManager = GameObject.FindWithTag("ItemManager").GetComponent <ItemManager>();
     }
 
     // Update is called once per frame
@@ -22,15 +27,32 @@ public class GameManager : MonoBehaviour
         return currentSeason;
     }
 
-    public void SetPlayer(GameObject player)
-    {
-        // Player script calls this method once spawned in
-        this.player = player;
-    }
-
     public GameObject GetPlayer()
     {
         return player;
+    }
+
+    public DataManager GetDataManager()
+    {
+        return dataManager;
+    }
+
+    public ItemManager GetItemManager()
+    {
+        return itemManager;
+    }
+
+    private void OnApplicationQuit()
+    {
+        dataManager.Save();
+    }
+
+    public void StartGame()
+    {
+        // Called when new game / load game button is pressed
+        player = Instantiate(playerPrefab);
+        dataManager.SetPlayer(player);
+        dataManager.Load();
     }
 }
 

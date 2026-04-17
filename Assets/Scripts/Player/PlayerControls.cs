@@ -19,6 +19,8 @@ public class PlayerControls : MonoBehaviour
     [SerializeField] private Animator animator;
     [SerializeField] private SpriteRenderer spriteRenderer;
 
+    private GameManager gameManager;
+
     private Rigidbody2D rb;
 
     private Vector2 currentInput;
@@ -30,6 +32,11 @@ public class PlayerControls : MonoBehaviour
 
     private Camera mainCamera;
 
+    private void Awake()
+    {
+        
+    }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -38,15 +45,17 @@ public class PlayerControls : MonoBehaviour
         spriteRenderer = GetComponent<SpriteRenderer>();
         inventory = GetComponent<Inventory>();
         mainCamera = Camera.main;
-
-        // Set player in game manager
-        GameObject.FindWithTag("GameManager").GetComponent<GameManager>().SetPlayer(gameObject);
+        gameManager = GameObject.FindWithTag("GameManager").GetComponent<GameManager>();
 
         // When player spawns in, enable the camera movement script
         mainCamera.GetComponent<CameraMovement>().enabled = true;
 
         // For debug add basic rod
-        inventory.AddItem("rod.rustline");
+        if(inventory.ContainsItem("rod.rustline"))
+        {
+            inventory.AddItem("rod.rustline");
+        }
+
         inventory.EquipItem("rod.rustline");
     }
 
@@ -67,8 +76,6 @@ public class PlayerControls : MonoBehaviour
 
     private void Fire()
     {
-        Debug.Log("Fired");
-
         // Called when player fires
         if(inventory.GetEquippedItem() is RodEntry)
         {

@@ -1,5 +1,6 @@
 using NUnit.Framework;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class Container : MonoBehaviour
@@ -66,9 +67,23 @@ public class Container : MonoBehaviour
     public void AddItem(string id)
     {
         ItemEntry item = GameObject.FindWithTag("ItemManager").GetComponent<ItemManager>().GetItemById(id);
-        Debug.Log($"Found {item.id}");
         ItemStack stack = new ItemStack(item);
         AddItem(stack);
+    }
+
+    public void SetItems(List<ItemStack> items)
+    {
+        this.items = items;
+    }
+
+    public List<ItemStack> GetItems()
+    {
+        return items;
+    }
+
+    public bool ContainsItem(string id)
+    {
+        return items.Any(i => i.item.id == id);
     }
 }
 

@@ -8,6 +8,8 @@ public class Inventory : Container
 
     private ItemEntry inHand;
 
+    private int money;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -33,5 +35,20 @@ public class Inventory : Container
     public ItemEntry GetEquippedItem()
     {
         return inHand;
+    }
+
+    public int GetMoney()
+    {
+        return money;
+    }
+
+    public void SetMoney(int money)
+    {
+        this.money = money;
+    }
+
+    public void DeltaMoney(int delta)
+    {
+        money += delta;
     }
 }
