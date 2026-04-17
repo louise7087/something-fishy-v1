@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 7313601089681780956}
   - component: {fileID: 4213455312384887369}
   - component: {fileID: 1103377269753628063}
+  - component: {fileID: 6471850236678852849}
   - component: {fileID: 7505113721489826422}
   m_Layer: 0
   m_Name: Player
@@ -266,7 +267,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 2, y: 2}
+    oldSize: {x: 1, y: 1}
     newSize: {x: 2, y: 2}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -274,6 +275,19 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 0.90519994, y: 1.39786}
   m_EdgeRadius: 0
+--- !u!114 &6471850236678852849
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2251506983071031958}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 75009ea4f5546ba4bb423845d52a0d84, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Container
+  capacity: 20
 --- !u!95 &7505113721489826422
 Animator:
   serializedVersion: 7
