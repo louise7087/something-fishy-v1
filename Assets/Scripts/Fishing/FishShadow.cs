@@ -44,6 +44,7 @@ public class FishShadow : MonoBehaviour
         Debug.Log($"Caught {fishEntry.id}");
         ItemStack stack = new ItemStack(fishEntry);
         gameManager.GetPlayer().GetComponent<Inventory>().AddItem(stack);
+        gameManager.GetEnvironmentManager().DecreaseFishCount();
 
         // Delete fish shadow
         Destroy(gameObject);

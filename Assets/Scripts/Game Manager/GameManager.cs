@@ -9,10 +9,12 @@ public class GameManager : MonoBehaviour
 
     private DataManager dataManager;
     private ItemManager itemManager;
+    private EnvironmentManager environmentManager;
 
     void Awake()
     {
         dataManager = GameObject.FindWithTag("DataManager").GetComponent<DataManager>();
+        environmentManager = GameObject.FindWithTag("EnvironmentManager").GetComponent<EnvironmentManager>();
         itemManager = GameObject.FindWithTag("ItemManager").GetComponent <ItemManager>();
     }
 
@@ -40,6 +42,11 @@ public class GameManager : MonoBehaviour
     public ItemManager GetItemManager()
     {
         return itemManager;
+    }
+
+    public EnvironmentManager GetEnvironmentManager()
+    {
+        return environmentManager;
     }
 
     private void OnApplicationQuit()
