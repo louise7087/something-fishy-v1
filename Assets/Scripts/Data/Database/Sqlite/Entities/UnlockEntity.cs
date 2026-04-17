@@ -20,7 +20,7 @@ public sealed class UnlockEntity
 {
     public Guid UnlockId { get; set; }
     public Guid PlayerId { get; set; }
-    public string UnlockKey { get; set; } = string.Empty;
+    public string UnlockDefinitionKey { get; set; } = string.Empty;
     public string UnlockType { get; set; } = string.Empty;
     public DateTime UnlockedUtcTicks { get; set; }
 

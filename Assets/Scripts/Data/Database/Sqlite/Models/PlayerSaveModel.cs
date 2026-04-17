@@ -8,9 +8,8 @@ public class PlayerSaveModel
     public int ProgressionLevel { get; set; }
     public string CurrentAreaKey { get; set; } = "starter_area";
     public string EquippedToolKey { get; set; } = "basic_rod";
-    public DateTime CreatedUtc { get; set; }
-    public DateTime UpdatedUtc { get; set; }
+    public int BalanceMinorUnits { get; set; }
     public List<InventoryItemModel> InventoryItems { get; set; } = new();
-    public List<OwnedUpgradeModel> UpgradesOwnership { get; set; } = new();
+    public List<OwnedUpgradeModel> OwnedUpgrades { get; set; } = new();
     public List<UnlockModel> Unlocks { get; set; } = new();
 }

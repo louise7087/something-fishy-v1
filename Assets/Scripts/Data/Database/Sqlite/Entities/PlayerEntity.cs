@@ -17,19 +17,6 @@
 using System;
 using System.Collections.Generic;
 
-/// <summary>
-/// Represents the persisted player row stored in SQLite.
-/// </summary>
-/// <remarks>
-/// Responsibilities:
-/// - Store persisted inventory item data.
-/// - Represent item identity, quantity, and ownership/location.
-/// - Support loading and saving inventory state in SQLite.
-///
-/// This type is a pure persistence model and must remain separate from
-/// runtime/domain inventory behavior (mapping to/from domain models
-/// should be done in repository or mapper layers).
-/// </remarks>
 public sealed class PlayerEntity
 {
     public Guid PlayerId { get; set; }

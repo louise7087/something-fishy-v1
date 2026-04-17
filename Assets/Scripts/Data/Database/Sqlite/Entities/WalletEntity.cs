@@ -16,19 +16,6 @@
 
 using System;
 
-/// <summary>
-/// Represents the persisted wallet row stored in SQLite.
-/// </summary>
-/// <remarks>
-/// Responsibilities:
-/// - Store persisted wallet data.
-/// - Represent wallet identity, balance, and ownership.
-/// - Support loading and saving wallet state in SQLite.
-///
-/// This type is a pure persistence model and must remain separate from
-/// runtime/domain wallet behavior (mapping to/from domain models
-/// should be done in repository or mapper layers).
-/// </remarks>
 public sealed class WalletEntity
 {
     public Guid WalletId { get; set; }
