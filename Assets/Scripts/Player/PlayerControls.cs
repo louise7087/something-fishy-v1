@@ -12,12 +12,15 @@ public class PlayerControls : MonoBehaviour
     [SerializeField] public bool lockMovement;
 
     [Header("Input Settings")]
-    [SerializeField] InputActionReference move;
-    [SerializeField] InputActionReference fire;
+    [SerializeField] InputActionReference moveReference;
+    [SerializeField] InputActionReference fireReference;
+    [SerializeField] InputActionReference inventoryReference;
 
     [Header("Animation Settings")]
     [SerializeField] private Animator animator;
     [SerializeField] private SpriteRenderer spriteRenderer;
+
+    private InventoryUI inventoryUI;
 
     private GameManager gameManager;
 
@@ -46,6 +49,9 @@ public class PlayerControls : MonoBehaviour
         inventory = GetComponent<Inventory>();
         mainCamera = Camera.main;
         gameManager = GameObject.FindWithTag("GameManager").GetComponent<GameManager>();
+        inventoryUI = GameObject.FindWithTag("InventoryUI").GetComponent<InventoryUI>();
+
+        inventoryUI.Init();
 
         // When player spawns in, enable the camera movement script
         mainCamera.GetComponent<CameraMovement>().enabled = true;
@@ -61,15 +67,20 @@ public class PlayerControls : MonoBehaviour
 
     private void Update()
     {
-        if (fire.action.WasPressedThisFrame())
+        if (fireReference.action.WasPressedThisFrame())
         {
             Fire();
+        }
+
+        if(inventoryReference.action.WasPressedThisFrame())
+        {
+            inventoryUI.Toggle();
         }
     }
 
     private void FixedUpdate()
     {
-        Vector2 input = move.action.ReadValue<Vector2>();
+        Vector2 input = moveReference.action.ReadValue<Vector2>();
         MovePlayer(input);
         SetAnimation();
     }

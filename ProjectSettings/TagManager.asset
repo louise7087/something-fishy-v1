@@ -9,6 +9,7 @@ TagManager:
   - EnvironmentManager
   - FishShadow
   - DataManager
+  - InventoryUI
   layers:
   - Default
   - TransparentFX
@@ -66,6 +67,9 @@ TagManager:
     locked: 0
   - name: Decor
     uniqueID: 4120637099
+    locked: 0
+  - name: UI
+    uniqueID: 797839521
     locked: 0
   m_RenderingLayers:
   - Default

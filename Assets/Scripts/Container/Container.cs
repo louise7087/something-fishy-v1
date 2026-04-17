@@ -85,12 +85,18 @@ public class Container : MonoBehaviour
     {
         return items.Any(i => i.item.id == id);
     }
+
+    public int GetCapacity()
+    {
+        return capacity;
+    }
 }
 
 [System.Serializable]
 public class ItemStack
 {
     public ItemEntry item;
+    public int position;
     public int amount;
 
     public ItemStack(ItemEntry item)
@@ -99,9 +105,10 @@ public class ItemStack
         amount = 1;
     }
 
-    public ItemStack(ItemEntry item, int amount)
+    public ItemStack(ItemEntry item, int position, int amount)
     {
         this.item = item;
+        this.position = position;
         this.amount = amount;
     }
 }

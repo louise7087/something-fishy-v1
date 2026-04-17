@@ -80,7 +80,7 @@ public class DataManager : MonoBehaviour
         foreach (var wrappedStack in storedWrappedStacks)
         {
             Debug.Log($"Found {wrappedStack.id} in saved inventory");
-            ItemStack stack = new ItemStack(gameManager.GetItemManager().GetItemById(wrappedStack.id), wrappedStack.amount);
+            ItemStack stack = new ItemStack(gameManager.GetItemManager().GetItemById(wrappedStack.id), wrappedStack.position, wrappedStack.amount);
             unwrappedStacks.Add(stack);
         }
 
@@ -94,7 +94,7 @@ public class DataManager : MonoBehaviour
 
         foreach(ItemStack stack in stacks)
         {
-            ItemStackWrapper wrappedStack = new ItemStackWrapper(stack.item.id, stack.amount);
+            ItemStackWrapper wrappedStack = new ItemStackWrapper(stack.item.id, stack.position, stack.amount);
             wrappedStacks.Add(wrappedStack);
         }
 
@@ -128,11 +128,13 @@ public class DataManager : MonoBehaviour
 public class ItemStackWrapper
 {
     public string id;
+    public int position;
     public int amount;
 
-    public ItemStackWrapper(string id, int amount)
+    public ItemStackWrapper(string id, int position, int amount)
     {
         this.id = id;
+        this.position = position;
         this.amount = amount;
     }
 }

@@ -6,7 +6,7 @@ public class MainMenuUI : MonoBehaviour
 {
     private GameManager gameManager;
 
-    UIDocument uiDocument;
+    private UIDocument uiDocument;
 
     private Button newGameButton;
     private Button loadGameButton;
