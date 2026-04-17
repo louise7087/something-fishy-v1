@@ -3,8 +3,6 @@ using UnityEngine;
 
 public class Inventory : Container
 {
-    [SerializeField] private int money;
-
     [SerializeField] private GameObject leftHand;
     [SerializeField] private GameObject rightHand;
 
@@ -35,20 +33,5 @@ public class Inventory : Container
     public ItemEntry GetEquippedItem()
     {
         return inHand;
-    }
-
-    public void SetMoney(int amount)
-    {
-        money = amount;
-    }
-
-    public void AddMoney(int amount)
-    {
-        money += amount;
-    }
-
-    public int GetMoney()
-    {
-        return money;
     }
 }
