@@ -11,8 +11,8 @@ GameObject:
   - component: {fileID: 4067124949602630147}
   - component: {fileID: 5529234297454631500}
   - component: {fileID: 5861346133970462218}
-  - component: {fileID: 2200148547604444181}
   - component: {fileID: 2477769928704032796}
+  - component: {fileID: 4069898676754468246}
   m_Layer: 0
   m_Name: Fish Shadow
   m_TagString: FishShadow
@@ -116,7 +116,19 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!61 &2200148547604444181
+--- !u!114 &2477769928704032796
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6041923256478545641}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1ff6a0613de74aa4fac76bd5f8746d15, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::FishShadow
+--- !u!61 &4069898676754468246
 BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -154,23 +166,11 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.16, y: 0.16}
+    oldSize: {x: 1, y: 1}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 0.16, y: 0.16}
+  m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
---- !u!114 &2477769928704032796
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6041923256478545641}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1ff6a0613de74aa4fac76bd5f8746d15, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::FishShadow
