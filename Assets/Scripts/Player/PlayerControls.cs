@@ -51,7 +51,7 @@ public class PlayerControls : MonoBehaviour
         mainCamera.GetComponent<CameraMovement>().enabled = true;
 
         // For debug add basic rod
-        if(inventory.ContainsItem("rod.rustline"))
+        if(!inventory.ContainsItem("rod.rustline"))
         {
             inventory.AddItem("rod.rustline");
         }
