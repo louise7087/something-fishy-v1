@@ -5,7 +5,7 @@ using UnityEngine.InputSystem;
 using UnityEngine.Tilemaps;
 using UnityEngine.Windows;
 
-public class PlayerMovement : MonoBehaviour
+public class PlayerControls : MonoBehaviour
 {
     [Header("Movement Settings")]
     [SerializeField] private float speed = 5f;
@@ -13,6 +13,7 @@ public class PlayerMovement : MonoBehaviour
 
     [Header("Input Settings")]
     [SerializeField] InputActionReference move;
+    [SerializeField] InputActionReference fire;
 
     [Header("Animation Settings")]
     [SerializeField] private Animator animator;
@@ -25,15 +26,36 @@ public class PlayerMovement : MonoBehaviour
 
     private bool isMoving;
 
+    private Inventory inventory;
+
+    private Camera mainCamera;
+
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
+        inventory = GetComponent<Inventory>();
+        mainCamera = Camera.main;
+
+        // Set player in game manager
+        GameObject.FindWithTag("GameManager").GetComponent<GameManager>().SetPlayer(gameObject);
 
         // When player spawns in, enable the camera movement script
-        Camera.main.GetComponent<CameraMovement>().enabled = true;
+        mainCamera.GetComponent<CameraMovement>().enabled = true;
+
+        // For debug add basic rod
+        inventory.AddItem("rod.rustline");
+        inventory.EquipItem("rod.rustline");
+    }
+
+    private void Update()
+    {
+        if (fire.action.WasPressedThisFrame())
+        {
+            Fire();
+        }
     }
 
     private void FixedUpdate()
@@ -43,9 +65,32 @@ public class PlayerMovement : MonoBehaviour
         SetAnimation();
     }
 
+    private void Fire()
+    {
+        Debug.Log("Fired");
+
+        // Called when player fires
+        if(inventory.GetEquippedItem() is RodEntry)
+        {
+            // Player has equipped rod
+            Vector2 mousePosition = mainCamera.ScreenToWorldPoint(Mouse.current.position.ReadValue());
+
+            RaycastHit2D hit = Physics2D.Raycast(mousePosition, Vector2.zero);
+
+            if(hit.collider != null)
+            {
+                // We hit something
+                if (hit.collider.CompareTag("FishShadow"))
+                {
+                    // Player hit fish shadow
+                    hit.collider.GetComponent<FishShadow>().Catch();
+                }
+            }
+        }
+    }
+
     private void MovePlayer(Vector2 input)
     {
-
         if (lockMovement) input = Vector2.zero;
 
         rb.linearVelocity = input * speed;

@@ -3,6 +3,7 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     [SerializeField] private Season currentSeason = Season.SPRING;
+    private GameObject player;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -19,6 +20,17 @@ public class GameManager : MonoBehaviour
     public Season GetSeason()
     {
         return currentSeason;
+    }
+
+    public void SetPlayer(GameObject player)
+    {
+        // Player script calls this method once spawned in
+        this.player = player;
+    }
+
+    public GameObject GetPlayer()
+    {
+        return player;
     }
 }
 

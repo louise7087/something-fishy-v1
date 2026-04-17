@@ -32,12 +32,9 @@ public class FishDatabase : ScriptableObject
 }
 
 [System.Serializable]
-public class FishEntry
+public class FishEntry : ItemEntry
 {
-    public string id;
-    public int value = 10;
     public SpawnSeason season;
-    public GameObject prefab;
 }
 
 public enum SpawnSeason

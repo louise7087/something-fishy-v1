@@ -1,11 +1,36 @@
+using System.Linq;
 using UnityEngine;
 
 public class ItemManager : MonoBehaviour
 {
     [SerializeField] public ItemDatabase itemDatabase;
     [SerializeField] public FishDatabase fishDatabase;
+    [SerializeField] public RodDatabase rodDatabase;
 
-    private void Start()
+    private void Awake()
     {
+        itemDatabase.Init();
+        fishDatabase.Init();
+        rodDatabase.Init();
+    }
+
+    public ItemEntry GetItemById(string id)
+    {
+        if(itemDatabase.items.Any(i => i.id == id))
+        {
+            return itemDatabase.Get(id);
+        }
+
+        if (fishDatabase.items.Any(i => i.id == id))
+        {
+            return fishDatabase.Get(id);
+        }
+
+        if (rodDatabase.items.Any(i => i.id == id))
+        {
+            return rodDatabase.Get(id);
+        }
+
+        return null;
     }
 }
