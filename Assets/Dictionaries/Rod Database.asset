@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c2fa716236f74c74c995984d195349e9, type: 3}
+  m_Name: Rod Database
+  m_EditorClassIdentifier: Assembly-CSharp::RodDatabase
+  items:
+  - id: rod.rustline
+    value: 0
+    maxStack: 1
+    prefab: {fileID: 1200319574362812620, guid: d3b8960e603ff084ebe3f8d00871dcbc, type: 3}
+    strength: 10
+  - id: rod.emberwood
+    value: 50
+    maxStack: 1
+    prefab: {fileID: 4231917831169418489, guid: d1b1521b169a7e3419433e4575691c0f, type: 3}
+    strength: 30
+  - id: rod.tidecaster
+    value: 100
+    maxStack: 1
+    prefab: {fileID: 2120927706208927619, guid: be5fc810aa1a6ea418d78b7242745087, type: 3}
+    strength: 50
+  - id: rod.aurora
+    value: 200
+    maxStack: 1
+    prefab: {fileID: 8703327096399383056, guid: 61f8338c7bd915a4380964cae4274d36, type: 3}
+    strength: 100

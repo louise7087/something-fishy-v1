@@ -31,4 +31,21 @@ public class FishShadow : MonoBehaviour
         fishEntry = itemManager.fishDatabase.GetRandomFishFromSeason(gameManager.GetSeason());
         Debug.Log($"Assigned {fishEntry.id} to fish shadow!");
     }
+
+    public void Catch()
+    {
+        // Change this later but for now:
+        Caught();
+    }
+
+    private void Caught()
+    {
+        // Method will be called when fish has been caught
+        Debug.Log($"Caught {fishEntry.id}");
+        ItemStack stack = new ItemStack(fishEntry);
+        gameManager.GetPlayer().GetComponent<Inventory>().AddItem(stack);
+
+        // Delete fish shadow
+        Destroy(gameObject);
+    }
 }
