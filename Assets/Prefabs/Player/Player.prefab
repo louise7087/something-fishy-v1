@@ -140,8 +140,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlayerMovement
   speed: 5
   lockMovement: 0
-  move: {fileID: -2900181364999163205, guid: e1d23b77e171b5646b942c746a8d456b, type: 3}
-  fire: {fileID: 9040255662788118429, guid: e1d23b77e171b5646b942c746a8d456b, type: 3}
+  moveReference: {fileID: -2900181364999163205, guid: e1d23b77e171b5646b942c746a8d456b, type: 3}
+  fireReference: {fileID: 9040255662788118429, guid: e1d23b77e171b5646b942c746a8d456b, type: 3}
+  inventoryReference: {fileID: -8566030468857422430, guid: e1d23b77e171b5646b942c746a8d456b, type: 3}
   animator: {fileID: 7505113721489826422}
   spriteRenderer: {fileID: 3787881418195800066}
 --- !u!114 &4213455312384887369
@@ -225,6 +226,10 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: 147507f2-f23e-4c1c-b4ed-59080c73c8b6
     m_ActionName: 'Player/Zoom[/Mouse/scroll/y]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: b914b280-7bda-4740-8815-2500e34dae50
+    m_ActionName: 'Player/Inventory[/Keyboard/i]'
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: Keyboard&Mouse
   m_DefaultActionMap: Player
@@ -288,8 +293,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd6291889fee97a4d8f97a15d1884753, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Inventory
-  capacity: 5
-  items: []
+  capacity: 15
+  stacks: []
   leftHand: {fileID: 5900302453001270586}
   rightHand: {fileID: 2494235581117204547}
   money: 0
