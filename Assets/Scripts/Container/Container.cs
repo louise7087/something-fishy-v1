@@ -6,7 +6,9 @@ public class Container : MonoBehaviour
 {
     [SerializeField] private int capacity;
 
-    private List<ItemStack> items = new List<ItemStack>();
+    [SerializeField] protected List<ItemStack> items = new List<ItemStack>();
+
+    private ItemDatabase database;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -22,7 +24,7 @@ public class Container : MonoBehaviour
 
     public void AddItem(ItemStack item)
     {
-        foreach (var stack in items)
+        /*foreach (var stack in items)
         {
             // Try stacking first
             if(stack.item == item.item)
@@ -32,6 +34,8 @@ public class Container : MonoBehaviour
                 {
                     // Can be stacked so we can add item
                     items.Add(item);
+                    Debug.Log($"Added {item.item.id} to container");
+
                 }
                 else
                 {
@@ -40,6 +44,7 @@ public class Container : MonoBehaviour
                     {
                         // We have a free spot
                         items.Add(item);
+                        Debug.Log($"Added {item.item.id} to container");
                     }
                 }
             }
@@ -49,13 +54,26 @@ public class Container : MonoBehaviour
                 if(items.Count < capacity)
                 {
                     items.Add(item);
+                    Debug.Log($"Added {item.item.id} to container");
                 }
             }
-        }
+        }*/
+
+        items.Add(item);
+        Debug.Log($"Added {item.item.id} to container");
+    }
+
+    public void AddItem(string id)
+    {
+        ItemEntry item = GameObject.FindWithTag("ItemManager").GetComponent<ItemManager>().GetItemById(id);
+        Debug.Log($"Found {item.id}");
+        ItemStack stack = new ItemStack(item);
+        AddItem(stack);
     }
 }
 
-public class ItemStack : MonoBehaviour
+[System.Serializable]
+public class ItemStack
 {
     public ItemEntry item;
     public int amount;

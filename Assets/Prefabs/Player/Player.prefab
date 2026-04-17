@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 7313601089681780956}
   - component: {fileID: 4213455312384887369}
   - component: {fileID: 1103377269753628063}
-  - component: {fileID: 6471850236678852849}
+  - component: {fileID: 1881908636733488657}
   - component: {fileID: 7505113721489826422}
   m_Layer: 0
   m_Name: Player
@@ -138,9 +138,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf0d7603f8bee2c4f866b8ae43475ecf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerMovement
-  speed: 5
+  speed: 2
   lockMovement: 0
   move: {fileID: -2900181364999163205, guid: e1d23b77e171b5646b942c746a8d456b, type: 3}
+  fire: {fileID: 9040255662788118429, guid: e1d23b77e171b5646b942c746a8d456b, type: 3}
   animator: {fileID: 7505113721489826422}
   spriteRenderer: {fileID: 3787881418195800066}
 --- !u!114 &4213455312384887369
@@ -263,7 +264,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: -0.000000029802322, y: 0.009123325}
+  m_Offset: {x: 0.0015962124, y: -0.0036465377}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -273,9 +274,9 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 0.90519994, y: 1.39786}
+  m_Size: {x: 0.40398133, y: 0.65082073}
   m_EdgeRadius: 0
---- !u!114 &6471850236678852849
+--- !u!114 &1881908636733488657
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -284,10 +285,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 2251506983071031958}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 75009ea4f5546ba4bb423845d52a0d84, type: 3}
+  m_Script: {fileID: 11500000, guid: cd6291889fee97a4d8f97a15d1884753, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Container
+  m_EditorClassIdentifier: Assembly-CSharp::Inventory
   capacity: 20
+  items: []
+  leftHand: {fileID: 5900302453001270586}
+  rightHand: {fileID: 2494235581117204547}
 --- !u!95 &7505113721489826422
 Animator:
   serializedVersion: 7
@@ -335,7 +339,7 @@ Transform:
   m_GameObject: {fileID: 2494235581117204547}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.212, y: -0.277, z: 0}
+  m_LocalPosition: {x: 0.13, y: -0.148, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -366,7 +370,7 @@ Transform:
   m_GameObject: {fileID: 5900302453001270586}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.24, y: -0.268, z: 0}
+  m_LocalPosition: {x: -0.093, y: -0.168, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
