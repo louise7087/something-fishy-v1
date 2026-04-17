@@ -48,6 +48,7 @@ public class DataManager : MonoBehaviour
         SavePosition(); 
         SaveInventory();
         SaveMoney();
+        PlayerPrefs.Save();
     }
 
     private void LoadPosition()
@@ -109,6 +110,17 @@ public class DataManager : MonoBehaviour
     private void SaveMoney()
     {
         PlayerPrefs.SetInt("money", inventory.GetMoney());
+    }
+
+    public void WipeSave()
+    {
+        PlayerPrefs.DeleteAll();
+        PlayerPrefs.Save();
+
+        if(File.Exists(Application.persistentDataPath + INVENTORY_PATH))
+        {
+            File.Delete(Application.persistentDataPath + INVENTORY_PATH);
+        }
     }
 }
 

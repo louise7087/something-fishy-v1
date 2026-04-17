@@ -34,7 +34,8 @@ public class MainMenu : MonoBehaviour
 
     private void OnNewGameClicked()
     {
-        throw new NotImplementedException();
+        gameManager.NewGame();
+        uiDocument.enabled = false;
     }
 
     private void OnLoadGameClicked()

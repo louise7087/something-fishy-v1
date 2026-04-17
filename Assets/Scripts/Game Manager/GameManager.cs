@@ -54,6 +54,12 @@ public class GameManager : MonoBehaviour
         dataManager.SetPlayer(player);
         dataManager.Load();
     }
+
+    public void NewGame()
+    {
+        dataManager.WipeSave();
+        StartGame();
+    }
 }
 
 public enum Season
