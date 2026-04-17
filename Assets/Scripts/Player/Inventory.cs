@@ -24,10 +24,10 @@ public class Inventory : Container
 
     public void EquipItem(string id)
     {
-        if(items.Any(i => i.item.id == id))
+        if(stacks.Any(i => i.item.id == id))
         {
             // We have this item in inventory so lets equip it
-            inHand = items.First(i => i.item.id == id).item;
+            inHand = stacks.First(i => i.item.id == id).item;
             Instantiate(inHand.prefab, rightHand.transform);
         }
     }

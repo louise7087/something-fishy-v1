@@ -15,55 +15,55 @@ MonoBehaviour:
   items:
   - id: fish.parrot
     value: 20
-    maxStack: 1
+    maxStack: 3
     prefab: {fileID: 7425973434950967351, guid: 78e4b8ef11bf94c489ac47d0fe7e219c, type: 3}
     season: 0
     Difficulty: 3
   - id: fish.mackerel
     value: 5
-    maxStack: 1
+    maxStack: 3
     prefab: {fileID: 6556336693574479598, guid: 0420980ff93b94e49a1820e8c2c7fc50, type: 3}
     season: 0
     Difficulty: 1
   - id: fish.clownfish
     value: 8
-    maxStack: 1
+    maxStack: 3
     prefab: {fileID: 6977363465311289132, guid: a0534c9a41c07004194ce169ffcdc674, type: 3}
     season: 0
     Difficulty: 1
   - id: fish.plaice
     value: 10
-    maxStack: 1
+    maxStack: 3
     prefab: {fileID: 2416350211598633466, guid: 56087613da99e904ca82eeac4ad61fde, type: 3}
     season: 0
     Difficulty: 2
   - id: fish.silvereel
     value: 15
-    maxStack: 1
+    maxStack: 3
     prefab: {fileID: 6342885091590615501, guid: 03cb62b4b1042e44d93f77a4306c9477, type: 3}
     season: 0
     Difficulty: 2
   - id: fish.seahorse
     value: 12
-    maxStack: 1
+    maxStack: 3
     prefab: {fileID: 3817387490745350939, guid: 322ac237fe688694497692a11569b7ae, type: 3}
     season: 0
     Difficulty: 2
   - id: fish.lionfish
     value: 25
-    maxStack: 1
+    maxStack: 3
     prefab: {fileID: 5737824455289110676, guid: c50e6353f0facab409a70fc774d13ad2, type: 3}
     season: 0
     Difficulty: 4
   - id: fish.cowfish
     value: 10
-    maxStack: 1
+    maxStack: 3
     prefab: {fileID: 3557432326983300414, guid: 9119683ad383d3b489538e26b7f0cf76, type: 3}
     season: 0
     Difficulty: 2
   - id: fish.tuna
     value: 15
-    maxStack: 1
+    maxStack: 3
     prefab: {fileID: 646449058684003449, guid: b218958d4ea37b34b9b7acd1095f1457, type: 3}
     season: 1
     Difficulty: 3

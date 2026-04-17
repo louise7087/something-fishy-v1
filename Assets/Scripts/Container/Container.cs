@@ -7,83 +7,81 @@ public class Container : MonoBehaviour
 {
     [SerializeField] private int capacity;
 
-    [SerializeField] protected List<ItemStack> items = new List<ItemStack>();
+    [SerializeField] protected List<ItemStack> stacks = new List<ItemStack>();
 
     private ItemDatabase database;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    private bool[] positionTaken;
+
+    private void Awake()
     {
-        
+        positionTaken = new bool[capacity];
     }
 
-    // Update is called once per frame
-    void Update()
+    public void AddStackAtBestPosition(ItemStack stack)
     {
-        
-    }
-
-    public void AddItem(ItemStack item)
-    {
-        /*foreach (var stack in items)
+        if(stacks.Count >= capacity)
         {
-            // Try stacking first
-            if(stack.item == item.item)
-            {
-                // We already have this item in container, can it stack?
-                if(stack.amount + item.amount < stack.item.maxStack)
-                {
-                    // Can be stacked so we can add item
-                    items.Add(item);
-                    Debug.Log($"Added {item.item.id} to container");
+            // Container is full
+            Debug.Log("Inventory Full");
+            return;
+        }
 
-                }
-                else
-                {
-                    // Can't be stacked so try adding to next available spot
-                    if(items.Count < capacity)
-                    {
-                        // We have a free spot
-                        items.Add(item);
-                        Debug.Log($"Added {item.item.id} to container");
-                    }
-                }
-            }
-            else
-            {
-                // We don't have this item in container so add to next spot
-                if(items.Count < capacity)
-                {
-                    items.Add(item);
-                    Debug.Log($"Added {item.item.id} to container");
-                }
-            }
-        }*/
+        foreach(ItemStack stackToAddTo in stacks.Where(i => i.item.id == stack.item.id && i.amount < i.item.maxStack))
+        {
+            int amountToAdd = Mathf.Min(stackToAddTo.item.maxStack - stackToAddTo.amount, stack.amount);
 
-        items.Add(item);
-        Debug.Log($"Added {item.item.id} to container");
+            stackToAddTo.amount += amountToAdd;
+            stack.amount -= amountToAdd;
+
+            if(stack.amount <= 0)
+            {
+                return;
+            }
+        }
+
+        for(int i = 0; i < capacity; i++)
+        {
+            if (positionTaken[i]) continue;
+
+            int amountToAdd = Mathf.Min(stack.amount, stack.item.maxStack);
+
+            ItemStack newStack = new ItemStack(stack.item, i, amountToAdd);
+
+            stacks.Add(newStack);
+            positionTaken[i] = true;
+
+            stack.amount -= amountToAdd;
+
+            if (stack.amount <= 0) return;
+        }
     }
 
-    public void AddItem(string id)
+    public void AddItem(string id, int amount = 0)
     {
         ItemEntry item = GameObject.FindWithTag("ItemManager").GetComponent<ItemManager>().GetItemById(id);
         ItemStack stack = new ItemStack(item);
-        AddItem(stack);
+        AddStackAtBestPosition(stack);
     }
 
-    public void SetItems(List<ItemStack> items)
+    public void SetItems(List<ItemStack> stacks)
     {
-        this.items = items;
+        this.stacks = stacks;
+
+        foreach(ItemStack stack in stacks)
+        {
+            positionTaken[stack.position] = true;
+        }
     }
 
     public List<ItemStack> GetItems()
     {
-        return items;
+        return stacks;
     }
 
     public bool ContainsItem(string id)
     {
-        return items.Any(i => i.item.id == id);
+        return stacks.Any(i => i.item.id == id);
     }
 
     public int GetCapacity()
@@ -96,13 +94,18 @@ public class Container : MonoBehaviour
 public class ItemStack
 {
     public ItemEntry item;
-    public int position;
-    public int amount;
+    public int position = -1;
+    public int amount = 1;
 
     public ItemStack(ItemEntry item)
     {
         this.item = item;
-        amount = 1;
+    }
+
+    public ItemStack(ItemEntry item, int amount)
+    {
+        this.item = item;
+        this.amount = amount;
     }
 
     public ItemStack(ItemEntry item, int position, int amount)
