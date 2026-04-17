@@ -6,6 +6,8 @@ public class MainMenu : MonoBehaviour
 {
     private GameManager gameManager;
 
+    UIDocument uiDocument;
+
     private Button newGameButton;
     private Button loadGameButton;
     private Button settingsButton;
@@ -15,7 +17,9 @@ public class MainMenu : MonoBehaviour
     {
         gameManager = GameObject.FindWithTag("GameManager").GetComponent<GameManager>();
 
-        var root = GetComponent<UIDocument>().rootVisualElement;
+        uiDocument = GetComponent<UIDocument>();
+
+        var root = uiDocument.rootVisualElement;
 
         newGameButton = root.Q<Button>("ButtonNewGame");
         loadGameButton = root.Q<Button>("ButtonLoadGame");
@@ -36,7 +40,7 @@ public class MainMenu : MonoBehaviour
     private void OnLoadGameClicked()
     {
         gameManager.StartGame();
-        gameObject.SetActive(false);
+        uiDocument.enabled = false;
     }
 
     private void OnSettingsClicked()

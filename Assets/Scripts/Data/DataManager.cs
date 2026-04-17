@@ -37,6 +37,7 @@ public class DataManager : MonoBehaviour
 
     public void Load()
     {
+        Debug.Log("Loading Data");
         LoadPosition();
         LoadInventory();
         LoadMoney();
