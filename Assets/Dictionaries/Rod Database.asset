@@ -17,19 +17,19 @@ MonoBehaviour:
     value: 0
     maxStack: 1
     prefab: {fileID: 1200319574362812620, guid: d3b8960e603ff084ebe3f8d00871dcbc, type: 3}
-    strength: 10
+    strength: 1
   - id: rod.emberwood
     value: 50
     maxStack: 1
     prefab: {fileID: 4231917831169418489, guid: d1b1521b169a7e3419433e4575691c0f, type: 3}
-    strength: 30
+    strength: 2
   - id: rod.tidecaster
     value: 100
     maxStack: 1
     prefab: {fileID: 2120927706208927619, guid: be5fc810aa1a6ea418d78b7242745087, type: 3}
-    strength: 50
+    strength: 3
   - id: rod.aurora
     value: 200
     maxStack: 1
     prefab: {fileID: 8703327096399383056, guid: 61f8338c7bd915a4380964cae4274d36, type: 3}
-    strength: 100
+    strength: 4
