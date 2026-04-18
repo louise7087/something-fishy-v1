@@ -1,7 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore.Storage.ValueConversion.Internal;
-using System;
+﻿using System;
 
-public sealed class MarketSyncState
+public sealed class MarketSyncStateEntity
 {
     public Guid MarketSyncStateId { get; set; }
     public string SyncScope { get; set; } = "global_market";

@@ -2,7 +2,7 @@
 
 public sealed class MarketOrderResultEntity
 {
-    public Guid MarketOrderResultEntityId { get; set; }
+    public Guid OrderResultId { get; set; }
     public Guid PlayerId { get; set; }
     public string OrderType { get; set; } = string.Empty; // SellFish, BuyUpgrade, BuySlot
     public string FishDefinitionKey { get; set; } = string.Empty;

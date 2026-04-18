@@ -1,10 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using Microsoft.EntityFrameworkCore;
+using UnityEngine;
 
-namespace Assets.Scripts.Data.Database.Sqlite
+public class DatabaseBootstrap : MonoBehaviour
 {
-    internal class DatabaseBootstrap
+    private void Awake()
     {
+        string dbPath = DbPathProvider.GetDatabasePath();
+        using var db = new GameDbContext(dbPath);
+        db.Database.Migrate();
     }
 }

@@ -19,7 +19,7 @@ public class PlayerMapper
             BalanceMinorUnits = entity.Wallet?.BalanceMinorUnits ?? 0,
             InventoryItems = entity.InventoryItems.Select(u => inventoryMapper.ToModel(u)).ToList(),
             Unlocks = entity.Unlocks.Select(u => unlockMapper.ToModel(u)).ToList(),
-            OwnedUpgrades = entity.UpgradesOwnership.Select(u => upgradeMapper.ToModel(u)).ToList()
+            OwnedUpgrades = entity.UpgradesOwnerships.Select(u => upgradeMapper.ToModel(u)).ToList()
         };
     }
 }

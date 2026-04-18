@@ -25,5 +25,7 @@ public sealed class TransactionEntity
     public string CurrencyCode { get; set; } = "COIN";
     public string ReferenceId { get; set; } = string.Empty;    // fish id / upgrade id / order id
     public string IdempotencyKey { get; set; } = string.Empty;
-    public DateTime CreatedUtcTicks { get; set; }
+    public DateTime CreatedUtc { get; set; }
+
+    public PlayerEntity Player { get; set; } = null!;
 }

@@ -29,7 +29,7 @@ public sealed class PlayerEntity
 
     public WalletEntity? Wallet { get; set; }
     public List<InventoryItemEntity> InventoryItems { get; set; } = new ();
-    public List<UpgradeOwnershipEntity> UpgradesOwnership { get; set; } = new();
+    public List<UpgradeOwnershipEntity> UpgradesOwnerships { get; set; } = new();
     public List<UnlockEntity> Unlocks { get; set; } = new();
-    public List<TransactionEntity> Transactions { get; set; }
+    public List<TransactionEntity> Transactions { get; set; } = new();
 }

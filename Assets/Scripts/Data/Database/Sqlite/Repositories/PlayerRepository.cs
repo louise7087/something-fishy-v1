@@ -13,3 +13,45 @@
 // - Infrastructure only
 // - Keep storage schema concerns out of runtime controllers
 // ============================================================
+
+using System;
+using System.Threading.Tasks;
+using Assets.Scripts.Data.Database.Sqlite;
+using Microsoft.EntityFrameworkCore;
+
+public class PlayerRepository
+{
+    private readonly string _databasePath;
+
+    public PlayerRepository(string databasePath)
+    {
+        _databasePath = databasePath;
+    }
+
+    public async Task<PlayerEntity?> GetByIdAsync(Guid playerId)
+    {
+        await using var db = new GameDbContext(_databasePath);
+
+        return await db.Players
+            .Include(p => p.Wallet)
+            .Include(p => p.InventoryItems)
+            .Include(p => p.UpgradesOwnerships)
+            .Include(p => p.Unlocks)
+            .Include(p => p.Transactions)
+            .FirstOrDefaultAsync(p => p.PlayerId == playerId);
+    }
+
+    public async Task AddAsync(PlayerEntity player) 
+    { 
+        await using var db = new GameDbContext(_databasePath);
+        await db.Players.AddAsync(player);
+        await db.SaveChangesAsync();
+    }
+
+    public async Task UpdateAsync(PlayerEntity player)
+    {
+        await using var db = new GameDbContext(_databasePath);
+        db.Players.Update(player);
+        await db.SaveChangesAsync();
+    }
+}

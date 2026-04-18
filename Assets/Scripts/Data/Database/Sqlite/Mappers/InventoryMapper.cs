@@ -22,8 +22,8 @@ public class InventoryMapper
             ItemDefinitionKey = model.ItemDefinitionKey,
             Quantity = model.Quantity,
             SlotIndex = model.SlotIndex,
-            CreatedUtcTicks = DateTime.UtcNow,
-            UpdatedUtcTicks = DateTime.UtcNow
+            CreatedUtc = DateTime.UtcNow,
+            UpdatedUtc = DateTime.UtcNow
         };
     }
 }
