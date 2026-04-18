@@ -67,7 +67,7 @@ public class PlayerControls : MonoBehaviour
             inventory.AddItem("rod.rustline");
         }
 
-        inventory.EquipItem("rod.rustline");
+        inventory.EquipItemAtIndex(0);
     }
 
     private void Update()
@@ -140,6 +140,26 @@ public class PlayerControls : MonoBehaviour
     {
         spriteRenderer.flipX = facingDirection.x > 0; // Flips sprite to face to the right if player is facing the right
 
+        if (facingDirection.y > 0)
+        {
+            // Put whatever object in player hands behind player sprite
+            inventory.SetInHandLayer(-1);
+        }
+        else
+        {
+            inventory.SetInHandLayer(1);
+        }
+
+        if(facingDirection.x < 0)
+        {
+            // If facing the left, put item in left hand
+            inventory.SetHand(false);
+        }
+        else
+        {
+            inventory.SetHand(true);
+        }
+
         if (isMoving)
         {
             // Walking Animations
@@ -166,6 +186,8 @@ public class PlayerControls : MonoBehaviour
 
     public void FinishedFishing()
     {
+        Debug.Log("Not fishing anymore");
+        bobber.Disable();
         isFishing = false;
     }
 }

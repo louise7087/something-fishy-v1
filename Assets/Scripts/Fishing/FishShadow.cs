@@ -7,6 +7,12 @@ public class FishShadow : MonoBehaviour
 
     private FishEntry fishEntry;
 
+    private float timeToLive = 15f;
+    private float deviation = 4f;
+
+    private float timeAlive;
+    private bool isBeingFished;
+
     private void Awake()
     {
         itemManager = GameObject.FindWithTag("ItemManager").GetComponent<ItemManager>();
@@ -17,12 +23,21 @@ public class FishShadow : MonoBehaviour
     void Start()
     {
         AssignFish();
+
+        timeToLive = timeToLive + Random.Range(-deviation, deviation);
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
-        
+        if (!isBeingFished)
+        {
+            timeAlive += Time.deltaTime;
+
+            if(timeAlive >= timeToLive)
+            {
+                SelfDestruct();
+            }
+        }
     }
 
     private void AssignFish()
@@ -55,5 +70,10 @@ public class FishShadow : MonoBehaviour
     public FishEntry GetFishEntry()
     {
         return fishEntry;
+    }
+
+    public void SetBeingFished(bool isBeingFished)
+    {
+        this.isBeingFished = isBeingFished;
     }
 }
