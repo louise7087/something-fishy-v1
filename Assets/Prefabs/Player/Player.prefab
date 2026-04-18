@@ -145,6 +145,7 @@ MonoBehaviour:
   inventoryReference: {fileID: -8566030468857422430, guid: e1d23b77e171b5646b942c746a8d456b, type: 3}
   animator: {fileID: 7505113721489826422}
   spriteRenderer: {fileID: 3787881418195800066}
+  bobber: {fileID: 0}
 --- !u!114 &4213455312384887369
 MonoBehaviour:
   m_ObjectHideFlags: 0

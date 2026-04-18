@@ -19,6 +19,7 @@ public class PlayerControls : MonoBehaviour
     [Header("Animation Settings")]
     [SerializeField] private Animator animator;
     [SerializeField] private SpriteRenderer spriteRenderer;
+    [SerializeField] private float bobberDisableDelay = 1f;
 
     private InventoryUI inventoryUI;
 
@@ -30,10 +31,13 @@ public class PlayerControls : MonoBehaviour
     private Vector2 facingDirection;
 
     private bool isMoving;
+    private bool isFishing;
 
     private Inventory inventory;
 
     private Camera mainCamera;
+
+    private Bobber bobber;
 
     private void Awake()
     {
@@ -50,6 +54,7 @@ public class PlayerControls : MonoBehaviour
         mainCamera = Camera.main;
         gameManager = GameObject.FindWithTag("GameManager").GetComponent<GameManager>();
         inventoryUI = GameObject.FindWithTag("InventoryUI").GetComponent<InventoryUI>();
+        bobber = GameObject.FindWithTag("Bobber").GetComponent<Bobber>();
 
         inventoryUI.Init();
 
@@ -88,12 +93,15 @@ public class PlayerControls : MonoBehaviour
     private void Fire()
     {
         // Called when player fires
-        if(inventory.GetEquippedItem() is RodEntry)
+        if(inventory.GetEquippedItem() is RodEntry && !isFishing)
         {
             // Player has equipped rod
             Vector2 mousePosition = mainCamera.ScreenToWorldPoint(Mouse.current.position.ReadValue());
 
             RaycastHit2D hit = Physics2D.Raycast(mousePosition, Vector2.zero);
+
+            bobber.SetPosition(mousePosition);
+            bobber.Enable();
 
             if(hit.collider != null)
             {
@@ -102,6 +110,11 @@ public class PlayerControls : MonoBehaviour
                 {
                     // Player hit fish shadow
                     gameManager.StartFishCatch(hit.collider.GetComponent<FishShadow>());
+                    isFishing = true;
+                }
+                else
+                {
+                    bobber.DelayedDisable(bobberDisableDelay);
                 }
             }
         }
@@ -149,5 +162,10 @@ public class PlayerControls : MonoBehaviour
 
         animator.SetFloat("X", Mathf.CeilToInt(facingDirection.x));
         animator.SetFloat("Y", Mathf.CeilToInt(facingDirection.y));
+    }
+
+    public void FinishedFishing()
+    {
+        isFishing = false;
     }
 }

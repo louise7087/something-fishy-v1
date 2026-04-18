@@ -24,11 +24,14 @@ public class GameManager : MonoBehaviour
     private ItemManager itemManager;
     private EnvironmentManager environmentManager;
 
+    private Bobber bobber;
+
     void Awake()
     {
         dataManager = GameObject.FindWithTag("DataManager").GetComponent<DataManager>();
         environmentManager = GameObject.FindWithTag("EnvironmentManager").GetComponent<EnvironmentManager>();
         itemManager = GameObject.FindWithTag("ItemManager").GetComponent <ItemManager>();
+        bobber = GameObject.FindWithTag("Bobber").GetComponent<Bobber>();
     }
 
     // Update is called once per frame
@@ -38,23 +41,31 @@ public class GameManager : MonoBehaviour
         {
             if(fails >= maxAllowedFails - currentFish.GetFishEntry().Difficulty)
             {
-                Debug.Log("Fishing Result = Lost");
                 currentFish.SelfDestruct();
                 isFishing = false;
                 fishingTimer = 0;
                 wins = 0;
                 fails = 0;
+
+                player.GetComponent<PlayerControls>().FinishedFishing();
+
+                bobber.Disable();
+
                 return;
             }
 
             if(wins >= currentFish.GetFishEntry().Difficulty)
             {
-                Debug.Log("Fishing result = caught");
                 currentFish.Catch();
                 isFishing = false;
                 fishingTimer = 0;
                 wins = 0;
                 fails = 0;
+
+                player.GetComponent<PlayerControls>().FinishedFishing();
+
+                bobber.Disable();
+
                 return;
             }
 
@@ -113,6 +124,8 @@ public class GameManager : MonoBehaviour
 
     public void StartFishCatch(FishShadow fish)
     {
+        if (isFishing) return;
+
         Debug.Log("Starting Fishing!");
         currentFish = fish;
         isFishing = true;
@@ -120,11 +133,13 @@ public class GameManager : MonoBehaviour
 
     private void TryStartFishingAttempt()
     {
-        if(Random.Range(0f, 1f) <= fishGameChance)
+        fishingTimer = 0;
+
+        if (Random.Range(0f, 1f) <= fishGameChance)
         {
             inFishingGame = true;
             float moveSpeed = 300f + Random.Range(-25f, 25f);
-            int chances = 6 - currentFish.GetComponent<FishShadow>().GetFishEntry().Difficulty;
+            int chances = 6 - currentFish.GetFishEntry().Difficulty;
             fishCatchMinigame.StartGame(moveSpeed, 30, 70, chances);
         }
     }
