@@ -29,7 +29,6 @@ public class FishShadow : MonoBehaviour
     {
         // Determines what this fish will be once caught
         fishEntry = itemManager.fishDatabase.GetRandomFishFromSeason(gameManager.GetSeason());
-        Debug.Log($"Assigned {fishEntry.id} to fish shadow!");
     }
 
     public void Catch()

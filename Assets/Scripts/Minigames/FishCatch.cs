@@ -154,12 +154,11 @@ public class FishCatch : MonoBehaviour
 
     private void Win()
     {
-        Debug.Log("FishCatch Won!");
         outcome = true;
     }
 
     private void Lose()
     {
-        Debug.Log("FishCatch Lose!");
+
     }
 }
