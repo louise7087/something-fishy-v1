@@ -87,7 +87,7 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 1770319921
   m_SortingLayer: 5
-  m_SortingOrder: 4
+  m_SortingOrder: 0
   m_MaskInteraction: 0
   m_Sprite: {fileID: 1433288950, guid: 2f69f8f1092c1a84a9e23a5913dcc69f, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -145,7 +145,7 @@ MonoBehaviour:
   inventoryReference: {fileID: -8566030468857422430, guid: e1d23b77e171b5646b942c746a8d456b, type: 3}
   animator: {fileID: 7505113721489826422}
   spriteRenderer: {fileID: 3787881418195800066}
-  bobber: {fileID: 0}
+  bobberDisableDelay: 1
 --- !u!114 &4213455312384887369
 MonoBehaviour:
   m_ObjectHideFlags: 0

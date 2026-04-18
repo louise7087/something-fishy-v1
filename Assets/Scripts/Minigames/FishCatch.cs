@@ -57,6 +57,8 @@ public class FishCatch : MonoBehaviour
 
     public void StartGame()
     {
+        chances = 1;
+
         fishCatchUI.SetActive(true);
 
         leftBackgroundBound = -backgroundUI.rect.width / 2f;
@@ -72,12 +74,15 @@ public class FishCatch : MonoBehaviour
         SetupTargetZone();
     }
 
-    public void StartGame(float moveSpeed, float minTargetsize, float maxTargetsize, int chances)
+    public void StartGame(float moveSpeed, float minTargetsize, float maxTargetsize, int maxChances)
     {
+        Debug.Log($"FishCatch game started with {moveSpeed} movespeed, {minTargetsize} minTargetSize, {maxTargetSize} maxTargetSize, {maxChances} chances");
+
         this.moveSpeed = moveSpeed;
         this.minTargetsize = minTargetsize;
         this.maxTargetSize = maxTargetsize;
-        this.chances = chances;
+        this.maxChances = maxChances;
+
         StartGame();
     }
     

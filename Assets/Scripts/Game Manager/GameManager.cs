@@ -42,30 +42,14 @@ public class GameManager : MonoBehaviour
             if(fails >= maxAllowedFails - currentFish.GetFishEntry().Difficulty)
             {
                 currentFish.SelfDestruct();
-                isFishing = false;
-                fishingTimer = 0;
-                wins = 0;
-                fails = 0;
-
-                player.GetComponent<PlayerControls>().FinishedFishing();
-
-                bobber.Disable();
-
+                ResetFishCatchGame();
                 return;
             }
 
             if(wins >= currentFish.GetFishEntry().Difficulty)
             {
                 currentFish.Catch();
-                isFishing = false;
-                fishingTimer = 0;
-                wins = 0;
-                fails = 0;
-
-                player.GetComponent<PlayerControls>().FinishedFishing();
-
-                bobber.Disable();
-
+                ResetFishCatchGame();
                 return;
             }
 
@@ -126,9 +110,13 @@ public class GameManager : MonoBehaviour
     {
         if (isFishing) return;
 
-        Debug.Log("Starting Fishing!");
+        fish.SetBeingFished(true);
         currentFish = fish;
         isFishing = true;
+
+        Debug.Log("Starting Fishing!");
+        Debug.Log($"{maxAllowedFails - currentFish.GetFishEntry().Difficulty} fails to lose");
+        Debug.Log($"{currentFish.GetFishEntry().Difficulty} wins to win");
     }
 
     private void TryStartFishingAttempt()
@@ -150,15 +138,28 @@ public class GameManager : MonoBehaviour
         {
             // Game was won
             wins++;
+            Debug.Log($"Wins: {wins}");
+            Debug.Log($"Fails: {fails}");
         }
         else
         {
             // Game was lost
             fails++;
+            Debug.Log($"Wins: {wins}");
+            Debug.Log($"Fails: {fails}");
         }
 
         inFishingGame = false;
         fishingTimer = 0;
+    }
+
+    private void ResetFishCatchGame()
+    {
+        isFishing = false;
+        fishingTimer = 0;
+        wins = 0;
+        fails = 0;
+        player.GetComponent<PlayerControls>().FinishedFishing();
     }
 }
 

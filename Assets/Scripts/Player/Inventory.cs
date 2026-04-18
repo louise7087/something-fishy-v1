@@ -7,29 +7,29 @@ public class Inventory : Container
     [SerializeField] private GameObject rightHand;
 
     private ItemEntry inHand;
+    private GameObject inHandObject;
 
     [SerializeField] private int money;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    public void EquipItemAtIndex(int index)
     {
-        
+        Unequip();
+
+        var stack = stacks.FirstOrDefault(i => i.position == index);
+
+        if(stack == null) return;
+
+        inHand = stack.item;
+        inHandObject = Instantiate(inHand.prefab, rightHand.transform);
     }
 
-    // Update is called once per frame
-    void Update()
+    public void Unequip()
     {
-        
-    }
+        if (inHand == null || inHandObject == null) return;
 
-    public void EquipItem(string id)
-    {
-        if(stacks.Any(i => i.item.id == id))
-        {
-            // We have this item in inventory so lets equip it
-            inHand = stacks.First(i => i.item.id == id).item;
-            Instantiate(inHand.prefab, rightHand.transform);
-        }
+        inHand = null;
+        Destroy(inHandObject);
+        inHandObject = null;
     }
 
     public ItemEntry GetEquippedItem()
@@ -50,5 +50,24 @@ public class Inventory : Container
     public void DeltaMoney(int delta)
     {
         money += delta;
+    }
+
+    public void SetInHandLayer(int layer)
+    {
+        inHandObject.GetComponentInChildren<SpriteRenderer>().sortingOrder = layer;
+    }
+
+    public void SetHand(bool right)
+    {
+        if(right)
+        {
+            inHandObject.transform.parent = rightHand.transform;
+            inHandObject.transform.localPosition = Vector3.zero;
+        }
+        else
+        {
+            inHandObject.transform.parent = leftHand.transform;
+            inHandObject.transform.localPosition = Vector3.zero;
+        }
     }
 }
