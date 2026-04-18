@@ -101,7 +101,7 @@ public class PlayerControls : MonoBehaviour
                 if (hit.collider.CompareTag("FishShadow"))
                 {
                     // Player hit fish shadow
-                    hit.collider.GetComponent<FishShadow>().Catch();
+                    gameManager.StartFishCatch(hit.collider.GetComponent<FishShadow>());
                 }
             }
         }

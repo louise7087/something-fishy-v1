@@ -43,9 +43,18 @@ public class FishShadow : MonoBehaviour
         // Method will be called when fish has been caught
         Debug.Log($"Caught {fishEntry.id}");
         gameManager.GetPlayer().GetComponent<Inventory>().AddItem(fishEntry.id);
-        gameManager.GetEnvironmentManager().DecreaseFishCount();
 
-        // Delete fish shadow
+        SelfDestruct();
+    }
+
+    public void SelfDestruct()
+    {
+        gameManager.GetEnvironmentManager().DecreaseFishCount();
         Destroy(gameObject);
+    }
+
+    public FishEntry GetFishEntry()
+    {
+        return fishEntry;
     }
 }
