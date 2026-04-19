@@ -159,10 +159,8 @@ public class DataManager : MonoBehaviour
         var dbPath = DbPathProvider.GetDatabasePath();
 
         var marketRepo = new MarketPriceRepository(dbPath);
-        var inventoryRepo = new InventoryRepository(dbPath);
-        var walletRepo = new WalletRepository(dbPath);
 
-        var sellFishService = new SellFishToMarketService(marketRepo, inventoryRepo, walletRepo);
+        var sellFishService = new SellFishToMarketService(marketRepo);
 
         var price = await sellFishService.loadFishPrice(itemId);
 
