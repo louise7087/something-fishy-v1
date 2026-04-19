@@ -12,6 +12,8 @@ TagManager:
   - InventoryUI
   - Bobber
   - HudUI
+  - ZoneManager
+  - Zone
   layers:
   - Default
   - TransparentFX
