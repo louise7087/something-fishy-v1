@@ -11942,7 +11942,7 @@ TilemapCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 496866127}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Density: 1
   m_Material: {fileID: 0}
@@ -14953,9 +14953,10 @@ GameObject:
   m_Component:
   - component: {fileID: 1190729597}
   - component: {fileID: 1190729598}
+  - component: {fileID: 1190729599}
   m_Layer: 5
   m_Name: Marketplace
-  m_TagString: InventoryUI
+  m_TagString: MarketplaceUI
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -14998,6 +14999,18 @@ MonoBehaviour:
   m_PivotReferenceSize: 0
   m_Pivot: 0
   m_WorldSpaceCollider: {fileID: 0}
+--- !u!114 &1190729599
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1190729596}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ad931a0811ac3334d8c1259e30afd9fe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MarketplaceUI
 --- !u!1 &1211068849
 GameObject:
   m_ObjectHideFlags: 0
@@ -26118,7 +26131,7 @@ BoxCollider2D:
   m_ExcludeLayers:
     serializedVersion: 2
     m_Bits: 0
-  m_LayerOverridePriority: 0
+  m_LayerOverridePriority: 5
   m_ForceSendLayers:
     serializedVersion: 2
     m_Bits: 4294967295
