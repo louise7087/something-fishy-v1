@@ -8,13 +8,14 @@ public class ZoneDatabase : ScriptableObject
     public List<ZoneEntry> items;
 
     private Dictionary<string, ZoneEntry> lookup;
+    private Dictionary<string, ZoneEntry> lookup;
 
     public void Init()
     {
         lookup = items.ToDictionary(i => i.id, i => i);
     }
 
-    public ZoneEntry GetZoneById(string zone)
+    public ZoneEntry GetZoneById(int zone)
     {
         return lookup[zone];
     }
@@ -24,7 +25,7 @@ public class ZoneDatabase : ScriptableObject
 public class ZoneEntry
 {
     public string name;
-    public string id;
+    public int id;
     public int cost;
     public GameObject prefab;
 }

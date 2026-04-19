@@ -16,13 +16,18 @@ public class MarketplaceUI : MonoBehaviour
 
     private Inventory inventory;
 
-    private Camera mainCamera;
+    private ItemManager itemManager;
 
-    private List<ItemStack> stacks;
+    private List<ItemStack> sellStacks;
+    private List<ItemStack> buyStacks = new List<ItemStack>();
 
-    private Image[] imageSlots;
-    private Label[] textSlots;
-    private Button[] buttonSlots;
+    private Image[] sellImageSlots;
+    private Label[] sellTextSlots;
+    private Button[] sellButtonSlots;
+
+    private Image[] buyImageSlots;
+    private Label[] buyTextSlots;
+    private Button[] buyButtonSlots;
 
     private Label moneyText;
     private Label seasonText;
@@ -36,16 +41,14 @@ public class MarketplaceUI : MonoBehaviour
     private bool isOpen;
     private bool showItemInfo;
 
-    private bool hasSetupUI;
-
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         gameManager = GameObject.FindWithTag("GameManager").GetComponent<GameManager>();
 
-        mainCamera = Camera.main;
-
         uiDocument = GetComponent<UIDocument>();
+
+        itemManager = GameObject.FindWithTag("ItemManager").GetComponent<ItemManager>();
     }
 
     private void Update()
@@ -64,18 +67,29 @@ public class MarketplaceUI : MonoBehaviour
     public void Init()
     {
         inventory = gameManager.GetPlayer().GetComponent<Inventory>();
+
+        var rodEntrys = itemManager.GetAllRods();
+
+        for(int i = 0; i < rodEntrys.Count; i++)
+        {
+            buyStacks.Add(new ItemStack(rodEntrys[i], i, 1));
+        }
     }
 
     private void SetupUI()
     {
         var root = uiDocument.rootVisualElement;
 
-        imageSlots = new Image[inventory.GetCapacity()];
-        textSlots = new Label[inventory.GetCapacity()];
-        buttonSlots = new Button[inventory.GetCapacity()];
+        sellImageSlots = new Image[inventory.GetCapacity()];
+        sellTextSlots = new Label[inventory.GetCapacity()];
+        sellButtonSlots = new Button[inventory.GetCapacity()];
 
-        moneyText = root.Q<Label>("inventory-text-money");
-        seasonText = root.Q<Label>("inventory-text-season");
+        buyImageSlots = new Image[inventory.GetCapacity()];
+        buyTextSlots = new Label[inventory.GetCapacity()];
+        buyButtonSlots = new Button[inventory.GetCapacity()];
+
+        moneyText = root.Q<Label>("marketplace-text-money");
+        seasonText = root.Q<Label>("marketplace-text-season");
 
         itemInfo = root.Q<VisualElement>("item-info");
         itemName = root.Q<Label>("item-text-name");
@@ -83,18 +97,26 @@ public class MarketplaceUI : MonoBehaviour
         itemDifficulty = root.Q<Label>("item-text-difficulty");
         itemSeason = root.Q<Label>("item-text-season");
 
-        for (int i = 0; i < imageSlots.Length; i++)
+        for (int i = 0; i < sellImageSlots.Length; i++)
         {
-            imageSlots[i] = root.Q<Image>($"inventory-slot-image-{i}");
-            textSlots[i] = root.Q<Label>($"inventory-slot-text-{i}");
-            buttonSlots[i] = root.Q<Button>($"inventory-slot-button-{i}");
+            sellImageSlots[i] = root.Q<Image>($"marketplace-sell-slot-image-{i}");
+            sellTextSlots[i] = root.Q<Label>($"marketplace-sell-slot-text-{i}");
+            sellButtonSlots[i] = root.Q<Button>($"marketplace-sell-slot-button-{i}");
+
+            buyImageSlots[i] = root.Q<Image>($"marketplace-buy-slot-image-{i}");
+            buyTextSlots[i] = root.Q<Label>($"marketplace-buy-slot-text-{i}");
+            buyButtonSlots[i] = root.Q<Button>($"marketplace-buy-slot-button-{i}");
 
             int index = i;
 
-            buttonSlots[i].clicked += () => OnInventoryButtonClicked(index);
+            sellButtonSlots[i].clicked += () => OnInventoryButtonClicked(index, false);
+            buyButtonSlots[i].clicked += () => OnInventoryButtonClicked(index, true);
 
-            buttonSlots[i].RegisterCallback<PointerEnterEvent>(_ => ShowItemInfo(index));
-            buttonSlots[i].RegisterCallback<PointerLeaveEvent>(_ => HideItemInfo());
+            sellButtonSlots[i].RegisterCallback<PointerEnterEvent>(_ => ShowItemInfo(index, false));
+            sellButtonSlots[i].RegisterCallback<PointerLeaveEvent>(_ => HideItemInfo());
+
+            buyButtonSlots[i].RegisterCallback<PointerEnterEvent>(_ => ShowItemInfo(index, true));
+            buyButtonSlots[i].RegisterCallback<PointerLeaveEvent>(_ => HideItemInfo());
         }
     }
 
@@ -102,21 +124,23 @@ public class MarketplaceUI : MonoBehaviour
     {
         var root = uiDocument.rootVisualElement;
 
-        buttonSlots = new Button[inventory.GetCapacity()];
+        sellButtonSlots = new Button[inventory.GetCapacity()];
 
-        for (int i = 0; i < imageSlots.Length; i++)
+        for (int i = 0; i < sellImageSlots.Length; i++)
         {
-            buttonSlots[i] = root.Q<Button>($"inventory-slot-button-{i}");
+            sellButtonSlots[i] = root.Q<Button>($"marketplace-sell-slot-button-{i}");
+            buyButtonSlots[i] = root.Q<Button>($"marketplace-buy-slot-button-{i}");
 
             int index = i;
 
-            buttonSlots[i].clicked -= () => OnInventoryButtonClicked(index);
+            sellButtonSlots[i].clicked -= () => OnInventoryButtonClicked(index, false);
+            buyButtonSlots[i].clicked -= () => OnInventoryButtonClicked(index, true);
         }
     }
 
     private void RefreshInventory()
     {
-        stacks = inventory.GetItems()
+        sellStacks = inventory.GetItems()
             .Where(i => i.item is FishEntry)
             .Select(i => new ItemStack(i.item, i.position, i.amount))
             .ToList();
@@ -126,20 +150,31 @@ public class MarketplaceUI : MonoBehaviour
         moneyText.text = $"${inventory.GetMoney()}";
         seasonText.text = gameManager.GetSeason().ToString();
 
-        for (int i = 0; i < imageSlots.Length; i++)
+        for (int i = 0; i < sellImageSlots.Length; i++)
         {
-            imageSlots[i].style.backgroundImage = StyleKeyword.None;
-            textSlots[i].text = "";
+            sellImageSlots[i].style.backgroundImage = StyleKeyword.None;
+            sellTextSlots[i].text = "";
+
+            buyImageSlots[i].style.backgroundImage = StyleKeyword.None;
+            buyTextSlots[i].text = "";
         }
 
-        for (int i = 0; i < stacks.Count; i++)
+        for (int i = 0; i < sellStacks.Count; i++)
         {
-            stacks[i].position = i;
+            sellStacks[i].position = i;
 
-            imageSlots[i].style.backgroundImage =
-                new StyleBackground(stacks[i].item.prefab.GetComponentInChildren<SpriteRenderer>().sprite);
+            sellImageSlots[i].style.backgroundImage =
+                new StyleBackground(sellStacks[i].item.prefab.GetComponentInChildren<SpriteRenderer>().sprite);
 
-            textSlots[i].text = stacks[i].amount.ToString();
+            sellTextSlots[i].text = sellStacks[i].amount.ToString();
+        }
+
+        for (int i = 0; i < buyStacks.Count; i++)
+        {
+            buyImageSlots[i].style.backgroundImage =
+                new StyleBackground(buyStacks[i].item.prefab.GetComponentInChildren<SpriteRenderer>().sprite);
+
+            buyTextSlots[i].text = $"${buyStacks[i].item.value.ToString()}";
         }
     }
 
@@ -161,23 +196,62 @@ public class MarketplaceUI : MonoBehaviour
         }
     }
 
-    private void OnInventoryButtonClicked(int index)
+    public void Open()
     {
-        var stack = stacks.FirstOrDefault(i => i.position == index);
+        if (isOpen) return;
 
-        if (stack == null) return;
+        isOpen = true;
+        uiDocument.enabled = true;
+        SetupUI();
+        RefreshInventory();
+    }
 
-        inventory.SellItem(stack.item.id);
+    public void Close()
+    {
+        if (!isOpen) return;
+
+        isOpen = false;
+        DeregisterButtons();
+        HideItemInfo();
+        uiDocument.enabled = false;
+    }
+
+    private void OnInventoryButtonClicked(int index, bool isBuyButton)
+    {
+        ItemStack stack = null;
+
+        if(isBuyButton)
+        {
+            stack = buyStacks.FirstOrDefault(i => i.position == index);
+            if (stack == null) return;
+            inventory.BuyItem(stack.item.id);
+        }
+        else
+        {
+            stack = sellStacks.FirstOrDefault(i => i.position == index);
+            if (stack == null) return;
+            inventory.SellItem(stack.item.id);
+        }
 
         RefreshInventory();
     }
 
-    private void ShowItemInfo(int index)
+    private void ShowItemInfo(int index, bool isBuySlot)
     {
         itemInfo.style.opacity = 1f;
         showItemInfo = true;
 
-        var stack = stacks.FirstOrDefault(i => i.position == index);
+        ItemStack stack = null;
+
+        if (isBuySlot)
+        {
+            stack = buyStacks.FirstOrDefault(i => i.position == index);
+        }
+        else
+        {
+            stack = sellStacks.FirstOrDefault(i => i.position == index);
+        }
+
 
         if (stack == null)
         {

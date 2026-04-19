@@ -61,8 +61,7 @@ public class GameManager : MonoBehaviour
                 ResetFishCatchGame();
                 return;
             }
-
-            if(wins >= currentFish.GetFishEntry().difficulty)
+            else if(wins >= currentFish.GetFishEntry().difficulty)
             {
                 currentFish.Catch();
                 ResetFishCatchGame();
@@ -202,7 +201,7 @@ public class GameManager : MonoBehaviour
 
     public void UnlockZone(string zoneId)
     {
-        var zone = zoneManager.GetZoneById(zoneId);
+        var zone = zoneManager.GetZoneByName(zoneId);
 
         // Can player afford?
         if (inventory.GetMoney() >= zone.cost)

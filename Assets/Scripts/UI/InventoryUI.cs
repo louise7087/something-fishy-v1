@@ -112,7 +112,15 @@ public class InventoryUI : MonoBehaviour
             int position = stack.position;
 
             imageSlots[position].style.backgroundImage = new StyleBackground(stack.item.prefab.GetComponentInChildren<SpriteRenderer>().sprite);
-            textSlots[position].text = stack.amount.ToString();
+
+            if(stack.amount > 1)
+            {
+                textSlots[position].text = stack.amount.ToString();
+            }
+            else
+            {
+                textSlots[position].text = string.Empty;
+            }
         }
     }
     
@@ -129,6 +137,24 @@ public class InventoryUI : MonoBehaviour
         {
             HideItemInfo();
         }
+    }
+
+    public void Open()
+    {
+        if (isOpen) return;
+
+        isOpen = true;
+        uiDocument.enabled = true;
+        RefreshInventory();
+    }
+
+    public void Close()
+    {
+        if (!isOpen) return;
+
+        isOpen = false;
+        uiDocument.enabled = false;
+        HideItemInfo();
     }
 
     private void OnInventoryButtonClicked(int index)

@@ -107,7 +107,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 847e2fdd84cdc034c8a657fed2fb3d1b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Zone
-  id: 1
+  id: second_zone
 --- !u!1001 &632232172400423556
 PrefabInstance:
   m_ObjectHideFlags: 0
