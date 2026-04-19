@@ -199,9 +199,9 @@ public class GameManager : MonoBehaviour
         return currentSeason;
     }
 
-    public void UnlockZone(int zoneId)
+    public void UnlockZone(string zoneId)
     {
-        var zone = zoneManager.GetZoneById(zoneId);
+        var zone = zoneManager.GetZoneByName(zoneId);
 
         // Can player afford?
         if (inventory.GetMoney() >= zone.cost)

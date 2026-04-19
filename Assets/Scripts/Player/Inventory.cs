@@ -11,12 +11,14 @@ public class Inventory : Container
     private GameObject inHandObject;
 
     private DataManager dataManager;
+    private ItemManager itemManager;
 
     [SerializeField] private int money;
 
     private void Start()
     {
         dataManager = GameObject.FindWithTag("DataManager").GetComponent<DataManager>();
+        itemManager = GameObject.FindWithTag("ItemManager").GetComponent<ItemManager>();
     }
 
     public void EquipItemAtIndex(int index)
@@ -112,5 +114,14 @@ public class Inventory : Container
         {
             RemoveStack(stack);
         }
+    }
+
+    public void BuyItem(string itemId)
+    {
+        ItemStack stack = new ItemStack(itemManager.GetItemById(itemId));
+
+        DeltaMoney(-stack.item.value);
+
+        AddStackAtBestPosition(stack);
     }
 }
