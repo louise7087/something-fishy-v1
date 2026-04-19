@@ -79,6 +79,11 @@ public class Container : MonoBehaviour
         return stacks;
     }
 
+    public ItemStack GetStackAtIndex(int index)
+    {
+        return stacks.FirstOrDefault(s => s.position == index);
+    }
+
     public bool ContainsItem(string id)
     {
         return stacks.Any(i => i.item.id == id);
