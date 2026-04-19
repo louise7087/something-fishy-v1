@@ -157,6 +157,7 @@ public class DataManager : MonoBehaviour
         
         string serialized  = string.Join(",", zones);
         PlayerPrefs.SetString("unlockedZones", serialized);
+        // test line
     }
 }
 
