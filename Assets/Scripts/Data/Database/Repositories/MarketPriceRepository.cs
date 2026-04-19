@@ -27,7 +27,7 @@ public class MarketPriceRepository
     {
         _databasePath = databasePath;
     }
-    public async Task<List<MarketPriceSnapshotEntity>> GetAll()
+    public async Task<List<MarketPriceSnapshotEntity>> GetAllAsync()
     {
         await using var db = new GameDbContext(_databasePath);
         return await db.MarketPriceSnapshots

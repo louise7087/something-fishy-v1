@@ -53,4 +53,24 @@ public class PlayerRepository
         db.Players.Update(player);
         await db.SaveChangesAsync();
     }
+
+    public async Task UpdatePlayerAsync(PlayerEntity player)
+    {
+        await using var db = new GameDbContext(_databasePath);
+        
+        var existingPlayer = await db.Players.FirstOrDefaultAsync(p => p.PlayerId == player.PlayerId);
+
+        if (existingPlayer != null)
+        {
+            existingPlayer.PlayerId = player.PlayerId;
+            existingPlayer.DisplayName = player.DisplayName;
+            existingPlayer.ProgressionLevel = player.ProgressionLevel;
+            existingPlayer.CurrentAreaKey = player.CurrentAreaKey;
+            existingPlayer.EquippedToolKey = player.EquippedToolKey;
+            existingPlayer.UpdatedUtc = player.UpdatedUtc;
+        }
+        else { return; }
+
+        await db.SaveChangesAsync();
+    }
 }

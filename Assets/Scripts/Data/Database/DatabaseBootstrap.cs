@@ -1,5 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class DatabaseBootstrap : MonoBehaviour
 {
@@ -7,6 +6,7 @@ public class DatabaseBootstrap : MonoBehaviour
     {
         string dbPath = DbPathProvider.GetDatabasePath();
         using var db = new GameDbContext(dbPath);
-        db.Database.Migrate();
+        db.Database.EnsureCreated();
+
     }
 }
