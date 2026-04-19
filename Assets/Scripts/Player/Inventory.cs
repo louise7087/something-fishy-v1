@@ -83,13 +83,13 @@ public class Inventory : Container
         }
     }
 
-    public void RefreshItemValues()
+    public async void RefreshItemValues()
     {
         foreach(ItemStack stack in stacks)
         {
             if(stack.item is FishEntry)
             {
-                stack.item.value = dataManager.GetItemPrice(stack.item.id);
+                stack.item.value = await dataManager.GetItemPrice(stack.item.id);
             }
         }
     }
