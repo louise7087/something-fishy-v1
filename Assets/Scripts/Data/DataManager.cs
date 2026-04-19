@@ -13,24 +13,14 @@ public class DataManager : MonoBehaviour
     private Inventory inventory;
 
     private GameManager gameManager;
+    private ZoneManager zoneManager;
 
     private const string INVENTORY_PATH = "/inventory.json";
-
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
 
     private void Awake()
     {
         gameManager = GameObject.FindWithTag("GameManager").GetComponent<GameManager>();
+        zoneManager = GameObject.FindWithTag("ZoneManager").GetComponent<ZoneManager>();
     }
 
     public void SetPlayer(GameObject player)
@@ -208,6 +198,36 @@ public class DataManager : MonoBehaviour
         {
             File.Delete(Application.persistentDataPath + INVENTORY_PATH);
         }
+    }
+
+    private void LoadUnlockedZones()
+    {
+        string serialized = PlayerPrefs.GetString("unlockedZones", "");
+
+        List<int> lockedZones = new List<int>();
+
+        if (!string.IsNullOrEmpty(serialized))
+        {
+            string[] parts = serialized.Split(',');
+
+            foreach (string part in parts)
+            {
+                if(int.TryParse(part, out int value))
+                {
+                    lockedZones.Add(value);
+                }
+            }
+        }
+
+        zoneManager.UnlockZones(lockedZones);
+    }
+
+    private void SaveUnlockedZones()
+    {
+        var zones = zoneManager.GetUnlockedZoneIds();
+        
+        string serialized  = string.Join(",", zones);
+        PlayerPrefs.SetString("unlockedZones", serialized);
     }
 }
 

@@ -93,12 +93,13 @@ public class PlayerControls : MonoBehaviour
     private void Fire()
     {
         // Called when player fires
-        if(inventory.GetEquippedItem() is RodEntry && !isFishing)
+
+        Vector2 mousePosition = mainCamera.ScreenToWorldPoint(Mouse.current.position.ReadValue());
+        RaycastHit2D hit = Physics2D.Raycast(mousePosition, Vector2.zero);
+
+        if (inventory.GetEquippedItem() is RodEntry && !isFishing)
         {
             // Player has equipped rod
-            Vector2 mousePosition = mainCamera.ScreenToWorldPoint(Mouse.current.position.ReadValue());
-
-            RaycastHit2D hit = Physics2D.Raycast(mousePosition, Vector2.zero);
 
             bobber.SetPosition(mousePosition);
             bobber.Enable();
@@ -116,6 +117,16 @@ public class PlayerControls : MonoBehaviour
                 {
                     bobber.DelayedDisable(bobberDisableDelay);
                 }
+            }
+        }
+
+        // Debug logic for zone unlock
+        if(hit.collider != null)
+        {
+            if(hit.collider.CompareTag("Zone"))
+            {
+                var zone = hit.collider.GetComponent<Zone>();
+                gameManager.UnlockZone(zone.GetId());
             }
         }
     }

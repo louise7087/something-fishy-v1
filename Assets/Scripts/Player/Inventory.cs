@@ -54,12 +54,16 @@ public class Inventory : Container
 
     public void SetInHandLayer(int layer)
     {
+        if(inHand == null) return;
+
         inHandObject.GetComponentInChildren<SpriteRenderer>().sortingOrder = layer;
     }
 
     public void SetHand(bool right)
     {
-        if(right)
+        if (inHand == null) return;
+
+        if (right)
         {
             inHandObject.transform.parent = rightHand.transform;
             inHandObject.transform.localPosition = Vector3.zero;
