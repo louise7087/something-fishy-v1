@@ -61,8 +61,7 @@ public class GameManager : MonoBehaviour
                 ResetFishCatchGame();
                 return;
             }
-
-            if(wins >= currentFish.GetFishEntry().difficulty)
+            else if(wins >= currentFish.GetFishEntry().difficulty)
             {
                 currentFish.Catch();
                 ResetFishCatchGame();

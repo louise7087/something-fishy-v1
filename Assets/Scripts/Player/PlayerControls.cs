@@ -122,9 +122,6 @@ public class PlayerControls : MonoBehaviour
         {
             // Player has equipped rod
 
-            bobber.SetPosition(mousePosition);
-            bobber.Enable();
-
             if(hit.collider != null)
             {
                 // We hit something
@@ -133,10 +130,9 @@ public class PlayerControls : MonoBehaviour
                     // Player hit fish shadow
                     gameManager.StartFishCatch(hit.collider.GetComponent<FishShadow>());
                     isFishing = true;
-                }
-                else
-                {
-                    bobber.DelayedDisable(bobberDisableDelay);
+
+                    bobber.SetPosition(mousePosition);
+                    bobber.Enable();
                 }
             }
         }
