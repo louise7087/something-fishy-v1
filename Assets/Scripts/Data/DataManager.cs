@@ -5,6 +5,7 @@ using System;
 using System.Linq;
 using Newtonsoft.Json;
 using Microsoft.EntityFrameworkCore;
+using System.Threading.Tasks;
 
 
 public class DataManager : MonoBehaviour
@@ -37,6 +38,9 @@ public class DataManager : MonoBehaviour
         {
             db.Database.EnsureCreated();
         }
+
+        var marketPriceRepository = new MarketPriceRepository(dbPath);
+        await marketPriceRepository.SeedDefaultsAsync();
 
         var playerRepository = new PlayerRepository(dbPath);
         var loadService = new LoadPlayerService(playerRepository);
@@ -150,10 +154,19 @@ public class DataManager : MonoBehaviour
         }
     }
 
-    public int GetItemPrice(string itemId)
+    public async Task<int> GetItemPrice(string itemId)
     {
+        var dbPath = DbPathProvider.GetDatabasePath();
 
-        return 10;
+        var marketRepo = new MarketPriceRepository(dbPath);
+        var inventoryRepo = new InventoryRepository(dbPath);
+        var walletRepo = new WalletRepository(dbPath);
+
+        var sellFishService = new SellFishToMarketService(marketRepo, inventoryRepo, walletRepo);
+
+        var price = await sellFishService.loadFishPrice(itemId);
+
+        return price;
     }
 }
 

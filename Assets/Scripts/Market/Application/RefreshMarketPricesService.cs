@@ -1,31 +1,53 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using UnityEngine;
 
 public class RefreshMarketPricesService
 {
     private readonly MarketPriceRepository _marketPriceRepository;
+    private const string LAST_MARKET_REFRESH_KEY = "lastMarketRefreshUtc";
+    private static readonly TimeSpan RefreshInterval = TimeSpan.FromMinutes(5);
     public RefreshMarketPricesService(MarketPriceRepository marketPriceRepository)
     {
         _marketPriceRepository = marketPriceRepository;
     }
-    public async void RefreshMarketPricesAsync(Season season)
+    public async Task RefreshMarketPricesAsync(Season season)
     {
         var marketPrices = await _marketPriceRepository.GetAllAsync();
         foreach (var marketPrice in marketPrices)
         {
             // Simulate price fluctuation by randomly adjusting the price within a range
             float demandMultiplier = GetSimulatedDemandMultiplier(marketPrice.FishDefinitionKey);
-            float seasonalMultiplier = GetSeasonalMultiplier(marketPrice.FishDefinitionKey, season);
-            marketPrice.CurrentBuyPriceMinorUnits = Mathf.RoundToInt(marketPrice.CurrentBuyPriceMinorUnits * demandMultiplier * seasonalMultiplier);
+            float seasonalMultiplier = GetSeasonalMultiplier(marketPrice.PeakSeason, season);
+            marketPrice.CurrentSellPriceMinorUnits = Mathf.RoundToInt(marketPrice.CurrentSellPriceMinorUnits * demandMultiplier * seasonalMultiplier);
             // Ensure the price does not drop below a certain threshold
-            if (marketPrice.CurrentBuyPriceMinorUnits < 1)
+            if (marketPrice.CurrentSellPriceMinorUnits < 1)
             {
-                marketPrice.CurrentBuyPriceMinorUnits = 1;
+                marketPrice.CurrentSellPriceMinorUnits = 1;
             }
             await _marketPriceRepository.UpdateAsync(marketPrice);
         }
     }
+
+    public async Task RefreshOnIntervalAsync(Season season)
+    {
+        string lastRefreshText = PlayerPrefs.GetString(LAST_MARKET_REFRESH_KEY, string.Empty);
+
+        if (DateTime.TryParse(lastRefreshText, out var lastRefresh))
+        {
+            if (DateTime.UtcNow - lastRefresh < RefreshInterval)
+            {
+                return;
+            }
+        }
+
+        await RefreshMarketPricesAsync(season);
+
+        PlayerPrefs.SetString(LAST_MARKET_REFRESH_KEY, DateTime.UtcNow.ToString("O"));
+        PlayerPrefs.Save();
+    }
+
     private float GetSimulatedDemandMultiplier(string fishId)
     {
         float noise = Mathf.PerlinNoise(
@@ -36,24 +58,13 @@ public class RefreshMarketPricesService
         return Mathf.Lerp(0.8f, 1.2f, noise);
     }
 
-    private float GetSeasonalMultiplier(string fishId, Season season)
+    private float GetSeasonalMultiplier(Season currentSeasonIndex, Season peakSeasonIndex)
     {
-        switch (season)
+        if (currentSeasonIndex == peakSeasonIndex)
         {
-            case Season.Spring:
-                return fishId == "salmon" ? 1.2f : 1.0f;
-
-            case Season.Summer:
-                return fishId == "tuna" ? 1.3f : 1.0f;
-
-            case Season.Autumn:
-                return fishId == "carp" ? 1.2f : 1.0f;
-
-            case Season.Winter:
-                return fishId == "cod" ? 1.3f : 1.0f;
-
-            default:
-                return 1.0f;
+            return 1.25f;
         }
+
+        return 0.9f;
     }
 }
