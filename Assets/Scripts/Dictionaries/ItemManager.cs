@@ -1,3 +1,5 @@
+using NUnit.Framework;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
@@ -32,5 +34,10 @@ public class ItemManager : MonoBehaviour
         }
 
         return null;
+    }
+
+    public List<RodEntry> GetAllRods()
+    {
+        return rodDatabase.items;
     }
 }

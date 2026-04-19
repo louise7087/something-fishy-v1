@@ -33,6 +33,7 @@ public class PlayerControls : MonoBehaviour
     private Vector2 facingDirection;
 
 
+
     private bool isMoving;
     private bool isFishing;
 
