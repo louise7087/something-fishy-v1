@@ -157,7 +157,7 @@ public class PlayerControls : MonoBehaviour
 
     private void SetAnimation()
     {
-        spriteRenderer.flipX = facingDirection.x > 0; // Flips sprite to face to the right if player is facing the right
+        spriteRenderer.flipX = facingDirection.x < 0; // Flips sprite to face to the right if player is facing the right
 
         if (facingDirection.y > 0)
         {
