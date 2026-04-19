@@ -14286,7 +14286,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cb01e71760470e14ea2b0c1a24ee2eef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnvironmentManager
-  fishSpawnChance: 0.5
+  fishSpawnChance: 0.7
   secondsBetweenFishSpawn: 3
   maxFish: 20
   fishShadowPrefab: {fileID: 6041923256478545641, guid: c17426d5cae5e9449bd7f0ad073565cd, type: 3}
@@ -25194,7 +25194,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1546939657
 Transform:
   m_ObjectHideFlags: 0

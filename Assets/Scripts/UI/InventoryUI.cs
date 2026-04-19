@@ -112,7 +112,15 @@ public class InventoryUI : MonoBehaviour
             int position = stack.position;
 
             imageSlots[position].style.backgroundImage = new StyleBackground(stack.item.prefab.GetComponentInChildren<SpriteRenderer>().sprite);
-            textSlots[position].text = stack.amount.ToString();
+
+            if(stack.amount > 1)
+            {
+                textSlots[position].text = stack.amount.ToString();
+            }
+            else
+            {
+                textSlots[position].text = string.Empty;
+            }
         }
     }
     
