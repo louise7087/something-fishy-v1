@@ -22,6 +22,7 @@ public class PlayerControls : MonoBehaviour
     [SerializeField] private float bobberDisableDelay = 1f;
 
     private InventoryUI inventoryUI;
+    private MarketplaceUI marketplaceUI;
 
     private GameManager gameManager;
 
@@ -54,9 +55,11 @@ public class PlayerControls : MonoBehaviour
         mainCamera = Camera.main;
         gameManager = GameObject.FindWithTag("GameManager").GetComponent<GameManager>();
         inventoryUI = GameObject.FindWithTag("InventoryUI").GetComponent<InventoryUI>();
+        marketplaceUI = GameObject.FindWithTag("MarketplaceUI").GetComponent<MarketplaceUI>();
         bobber = GameObject.FindWithTag("Bobber").GetComponent<Bobber>();
 
         inventoryUI.Init();
+        marketplaceUI.Init();
 
         // When player spawns in, enable the camera movement script
         mainCamera.GetComponent<CameraMovement>().enabled = true;
@@ -128,6 +131,11 @@ public class PlayerControls : MonoBehaviour
                 var zone = hit.collider.GetComponent<Zone>();
                 gameManager.UnlockZone(zone.GetId());
             }
+        }
+
+        if(hit.collider != null && hit.collider.CompareTag("Marketplace"))
+        {
+            marketplaceUI.Toggle();
         }
     }
 

@@ -1,3 +1,4 @@
+using Microsoft.EntityFrameworkCore.ChangeTracking;
 using System.Linq;
 using UnityEngine;
 
@@ -9,7 +10,14 @@ public class Inventory : Container
     private ItemEntry inHand;
     private GameObject inHandObject;
 
+    private DataManager dataManager;
+
     [SerializeField] private int money;
+
+    private void Start()
+    {
+        dataManager = GameObject.FindWithTag("DataManager").GetComponent<DataManager>();
+    }
 
     public void EquipItemAtIndex(int index)
     {
@@ -73,5 +81,38 @@ public class Inventory : Container
             inHandObject.transform.parent = leftHand.transform;
             inHandObject.transform.localPosition = Vector3.zero;
         }
+    }
+
+    public void RefreshItemValues()
+    {
+        foreach(ItemStack stack in stacks)
+        {
+            if(stack.item is FishEntry)
+            {
+                stack.item.value = dataManager.GetItemPrice(stack.item.id);
+            }
+        }
+    }
+
+    public void SellItem(string itemId)
+    {
+        var stack = stacks.FirstOrDefault(i => i.item.id == itemId);
+
+        if(stack == null)
+        {
+            Debug.LogError("Item not found in inventory!");
+            return;
+        }
+
+        DeltaMoney(stack.item.value);
+
+        stack.amount--;
+
+        if(stack.amount <= 0)
+        {
+            RemoveStack(stack);
+        }
+
+        Debug.Log($"Sold {itemId} for {stack.item.value}");
     }
 }

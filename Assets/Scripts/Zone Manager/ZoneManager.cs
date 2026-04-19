@@ -17,7 +17,7 @@ public class ZoneManager : MonoBehaviour
         // Spawn all zones in for now
         foreach(ZoneEntry zoneEntry in zoneDatabase.items)
         {
-            lockedZonesGameObjects.Add(zoneEntry.zone, Instantiate(zoneEntry.prefab));
+            lockedZonesGameObjects.Add(zoneEntry.id, Instantiate(zoneEntry.prefab));
         }
 
         Debug.Log("Spawned all zones");
