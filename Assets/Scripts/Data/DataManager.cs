@@ -41,6 +41,7 @@ public class DataManager : MonoBehaviour
         LoadPosition();
         LoadInventory();
         LoadMoney();
+        LoadTime();
     }
 
     public void Save()
@@ -48,6 +49,7 @@ public class DataManager : MonoBehaviour
         SavePosition(); 
         SaveInventory();
         SaveMoney();
+        SaveTime();
         PlayerPrefs.Save();
     }
 
@@ -110,6 +112,18 @@ public class DataManager : MonoBehaviour
     private void SaveMoney()
     {
         PlayerPrefs.SetInt("money", inventory.GetMoney());
+    }
+
+    private void LoadTime()
+    {
+        gameManager.SetCurrentSeason((Season)PlayerPrefs.GetInt("season"));
+        gameManager.SetCurrentSeasonTime(PlayerPrefs.GetFloat("time"));
+    }
+
+    private void SaveTime()
+    {
+        PlayerPrefs.SetInt("season", (int)gameManager.GetCurrentSeason());
+        PlayerPrefs.SetFloat("time", gameManager.GetCurrentSeasonTime());
     }
 
     public void WipeSave()
