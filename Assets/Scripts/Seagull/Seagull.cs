@@ -24,7 +24,9 @@ public class Seagull : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Vector2.Distance(transform.position, targetPosition) < tolerance)
+        var diff = (Vector2)(transform.position - targetPosition);
+
+        if(diff.sqrMagnitude < tolerance * tolerance)
         {
             animator.SetBool("isFlying", false);
             waitTimer += Time.deltaTime;

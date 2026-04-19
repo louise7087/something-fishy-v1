@@ -107,8 +107,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Seagull
   speed: 2
   timeBetweenFlight: 5
-  deviation: 3
-  maxDistanceFromPlayer: 5
+  deviation: 5
+  maxDistanceFromPlayer: 20
   tolerance: 0.5
   animator: {fileID: 1177795463222900590}
   spriteRenderer: {fileID: 4994988855067019089}

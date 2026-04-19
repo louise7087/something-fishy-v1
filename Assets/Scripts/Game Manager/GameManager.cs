@@ -2,14 +2,18 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    [SerializeField] private Season currentSeason = Season.SPRING;
-    [SerializeField] private GameObject playerPrefab;
+    
 
     [Header("Fishing Settings")]
     [SerializeField] FishCatch fishCatchMinigame;
     [SerializeField] private float fishGameChance;
     [SerializeField] private float minTimeBetweenAttempts;
     [SerializeField] private int maxAllowedFails;
+
+    [SerializeField] private float seasonLengthSeconds = 20;
+    [SerializeField] private Season currentSeason = Season.Spring;
+    [SerializeField] private GameObject playerPrefab;
+    private float currentSeasonTime;
 
     private int wins;
     private int fails;
@@ -37,6 +41,14 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        currentSeasonTime += Time.deltaTime;
+
+        if(currentSeasonTime >= seasonLengthSeconds)
+        {
+            NextSeason();
+            currentSeasonTime = 0;
+        }
+
         if (isFishing && !inFishingGame)
         {
             if(fails >= maxAllowedFails - currentFish.GetFishEntry().difficulty)
@@ -115,8 +127,6 @@ public class GameManager : MonoBehaviour
         isFishing = true;
 
         Debug.Log("Starting Fishing!");
-        Debug.Log($"{maxAllowedFails - currentFish.GetFishEntry().difficulty} fails to lose");
-        Debug.Log($"{currentFish.GetFishEntry().difficulty} wins to win");
     }
 
     private void TryStartFishingAttempt()
@@ -126,7 +136,7 @@ public class GameManager : MonoBehaviour
         if (Random.Range(0f, 1f) <= fishGameChance)
         {
             inFishingGame = true;
-            float moveSpeed = 300f + Random.Range(-25f, 25f);
+            float moveSpeed = 300f + Random.Range(-25f, 100f);
             int chances = 6 - currentFish.GetFishEntry().difficulty;
             fishCatchMinigame.StartGame(moveSpeed, 30, 70, chances);
         }
@@ -138,15 +148,11 @@ public class GameManager : MonoBehaviour
         {
             // Game was won
             wins++;
-            Debug.Log($"Wins: {wins}");
-            Debug.Log($"Fails: {fails}");
         }
         else
         {
             // Game was lost
             fails++;
-            Debug.Log($"Wins: {wins}");
-            Debug.Log($"Fails: {fails}");
         }
 
         inFishingGame = false;
@@ -161,12 +167,38 @@ public class GameManager : MonoBehaviour
         fails = 0;
         player.GetComponent<PlayerControls>().FinishedFishing();
     }
+
+    private void NextSeason()
+    {
+        int count = System.Enum.GetValues(typeof(Season)).Length;
+        SetCurrentSeason((Season)(((int)currentSeason + 1) % count));
+    }
+
+    public void SetCurrentSeasonTime(float time)
+    {
+        currentSeasonTime = time;
+    }
+
+    public void SetCurrentSeason(Season season)
+    {
+        currentSeason = season;
+    }
+
+    public float GetCurrentSeasonTime()
+    {
+        return currentSeasonTime;
+    }
+
+    public Season GetCurrentSeason()
+    {
+        return currentSeason;
+    }
 }
 
 public enum Season
 {
-    SPRING,
-    SUMMER,
-    AUTUMN,
-    WINTER
+    Spring,
+    Summer,
+    Autumn,
+    Winter
 }

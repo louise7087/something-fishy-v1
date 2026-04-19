@@ -22,10 +22,14 @@ public class InventoryUI : MonoBehaviour
     private Label[] textSlots;
     private Button[] buttonSlots;
 
+    private Label moneyText;
+    private Label seasonText;
+
     private VisualElement itemInfo;
     private Label itemName;
     private Label itemValue;
     private Label itemDifficulty;
+    private Label itemSeason;
 
     private bool isOpen;
     private bool showItemInfo;
@@ -66,10 +70,17 @@ public class InventoryUI : MonoBehaviour
         textSlots = new Label[inventory.GetCapacity()];
         buttonSlots = new Button[inventory.GetCapacity()];
 
+        moneyText = root.Q<Label>("inventory-text-money");
+        seasonText = root.Q<Label>("inventory-text-season");
+
+        moneyText.text = $"${inventory.GetMoney()}";
+        seasonText.text = gameManager.GetSeason().ToString();
+
         itemInfo = root.Q<VisualElement>("item-info");
         itemName = root.Q<Label>("item-text-name");
         itemValue = root.Q<Label>("item-text-value");
         itemDifficulty = root.Q<Label>("item-text-difficulty");
+        itemSeason = root.Q<Label>("item-text-season");
 
         for (int i = 0; i < imageSlots.Length; i++)
         {
@@ -139,14 +150,19 @@ public class InventoryUI : MonoBehaviour
 
         itemName.text = stack.item.name;
         itemValue.text = $"${stack.item.value}";
+
+        // Clear season text
+        itemSeason.text = string.Empty;
         
         if (stack.item is RodEntry rod)
         {
-            itemDifficulty.text = $"{rod.strength} strength";
+            itemDifficulty.text = $"Strength: {rod.strength}";
+            itemValue.text = string.Empty;
         }
         else if (stack.item is FishEntry fish)
         {
-            itemDifficulty.text = $"{fish.difficulty} difficulty";
+            itemDifficulty.text = $"Difficulty: {fish.difficulty}";
+            itemSeason.text = fish.season.ToString();
         }
     }
 

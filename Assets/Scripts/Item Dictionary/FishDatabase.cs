@@ -23,7 +23,7 @@ public class FishDatabase : ScriptableObject
 
     public FishEntry GetRandomFishFromSeason(Season season)
     {
-        var possibleFish = items.Where(i => (int)i.season == (int)season || i.season == SpawnSeason.ALL).ToList(); // Gets all fish where seasons match
+        var possibleFish = items.Where(i => (int)i.season == (int)season || i.season == SpawnSeason.All).ToList(); // Gets all fish where seasons match
 
         int randomIndex = UnityEngine.Random.Range(0, possibleFish.Count());
 
@@ -40,9 +40,9 @@ public class FishEntry : ItemEntry
 
 public enum SpawnSeason
 {
-    SPRING,
-    SUMMER,
-    AUTUMN,
-    WINTER,
-    ALL
+    Spring,
+    Summer,
+    Autumn,
+    Winter,
+    All
 }

@@ -32,7 +32,7 @@ public class FishCatch : MonoBehaviour
     private bool isPlaying;
     private bool gameEnded;
 
-    private int chances = 1;
+    private int chances;
 
     private bool outcome;
 
@@ -57,7 +57,7 @@ public class FishCatch : MonoBehaviour
 
     public void StartGame()
     {
-        chances = 1;
+        chances = 0;
 
         fishCatchUI.SetActive(true);
 
