@@ -140,6 +140,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlayerMovement
   speed: 5
   lockMovement: 0
+  distanceToMarketplace: 4
   moveReference: {fileID: -2900181364999163205, guid: e1d23b77e171b5646b942c746a8d456b, type: 3}
   fireReference: {fileID: 9040255662788118429, guid: e1d23b77e171b5646b942c746a8d456b, type: 3}
   inventoryReference: {fileID: -8566030468857422430, guid: e1d23b77e171b5646b942c746a8d456b, type: 3}
