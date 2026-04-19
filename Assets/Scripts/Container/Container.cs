@@ -64,6 +64,12 @@ public class Container : MonoBehaviour
         AddStackAtBestPosition(stack);
     }
 
+    public void RemoveStack(ItemStack stack)
+    {
+        stacks.Remove(stack);
+        positionTaken[stack.position] = false;
+    }
+
     public void SetItems(List<ItemStack> stacks)
     {
         this.stacks = stacks;
