@@ -93,4 +93,26 @@ public class Inventory : Container
             }
         }
     }
+
+    public void SellItem(string itemId)
+    {
+        var stack = stacks.FirstOrDefault(i => i.item.id == itemId);
+
+        if(stack == null)
+        {
+            Debug.LogError("Item not found in inventory!");
+            return;
+        }
+
+        DeltaMoney(stack.item.value);
+
+        stack.amount--;
+
+        if(stack.amount <= 0)
+        {
+            RemoveStack(stack);
+        }
+
+        Debug.Log($"Sold {itemId} for {stack.item.value}");
+    }
 }
