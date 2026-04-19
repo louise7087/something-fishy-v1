@@ -2,11 +2,13 @@
 
 public class DatabaseBootstrap : MonoBehaviour
 {
-    private void Awake()
+    private async void Awake()
     {
         string dbPath = DbPathProvider.GetDatabasePath();
 
         using var db = new GameDbContext(dbPath);
-        db.Database.EnsureCreated();
+        {
+            db.Database.EnsureCreated();
+        }
     }
 }

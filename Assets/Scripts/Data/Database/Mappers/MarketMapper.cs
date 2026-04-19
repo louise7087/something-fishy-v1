@@ -6,8 +6,10 @@
         {
             MarketPriceSnapshotId = entity.MarketPriceSnapshotId,
             FishDefinitionKey = entity.FishDefinitionKey,
-            CurrentBuyPriceMinorUnits = entity.CurrentBuyPriceMinorUnits,
+            CurrentBuyPriceMinorUnits = entity.CurrentSellPriceMinorUnits,
             CurrentSellPriceMinorUnits = entity.CurrentSellPriceMinorUnits,
+            PeakSeason = entity.PeakSeason,
+            Difficulty = entity.Difficulty,
             RetrievedUtc = entity.RetrievedUtc
         };
     }
