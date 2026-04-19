@@ -16,7 +16,6 @@
 
 using System;
 using System.Threading.Tasks;
-using Assets.Scripts.Data.Database.Sqlite;
 using Microsoft.EntityFrameworkCore;
 
 public class WalletRepository
