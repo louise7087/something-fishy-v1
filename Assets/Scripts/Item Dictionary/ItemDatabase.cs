@@ -24,6 +24,7 @@ public class ItemDatabase : ScriptableObject
 [System.Serializable]
 public class ItemEntry
 {
+    public string name;
     public string id;
     public int value = 10;
     public int maxStack = 1;

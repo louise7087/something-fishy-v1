@@ -35,7 +35,7 @@ public class FishDatabase : ScriptableObject
 public class FishEntry : ItemEntry
 {
     public SpawnSeason season;
-    public int Difficulty;
+    public int difficulty;
 }
 
 public enum SpawnSeason

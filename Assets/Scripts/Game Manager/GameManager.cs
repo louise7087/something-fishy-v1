@@ -39,14 +39,14 @@ public class GameManager : MonoBehaviour
     {
         if (isFishing && !inFishingGame)
         {
-            if(fails >= maxAllowedFails - currentFish.GetFishEntry().Difficulty)
+            if(fails >= maxAllowedFails - currentFish.GetFishEntry().difficulty)
             {
                 currentFish.SelfDestruct();
                 ResetFishCatchGame();
                 return;
             }
 
-            if(wins >= currentFish.GetFishEntry().Difficulty)
+            if(wins >= currentFish.GetFishEntry().difficulty)
             {
                 currentFish.Catch();
                 ResetFishCatchGame();
@@ -115,8 +115,8 @@ public class GameManager : MonoBehaviour
         isFishing = true;
 
         Debug.Log("Starting Fishing!");
-        Debug.Log($"{maxAllowedFails - currentFish.GetFishEntry().Difficulty} fails to lose");
-        Debug.Log($"{currentFish.GetFishEntry().Difficulty} wins to win");
+        Debug.Log($"{maxAllowedFails - currentFish.GetFishEntry().difficulty} fails to lose");
+        Debug.Log($"{currentFish.GetFishEntry().difficulty} wins to win");
     }
 
     private void TryStartFishingAttempt()
@@ -127,7 +127,7 @@ public class GameManager : MonoBehaviour
         {
             inFishingGame = true;
             float moveSpeed = 300f + Random.Range(-25f, 25f);
-            int chances = 6 - currentFish.GetFishEntry().Difficulty;
+            int chances = 6 - currentFish.GetFishEntry().difficulty;
             fishCatchMinigame.StartGame(moveSpeed, 30, 70, chances);
         }
     }
