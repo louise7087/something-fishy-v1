@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
@@ -23,10 +24,12 @@ public class GameManager : MonoBehaviour
     private FishShadow currentFish;
 
     private GameObject player;
+    private Inventory inventory;
 
     private DataManager dataManager;
     private ItemManager itemManager;
     private EnvironmentManager environmentManager;
+    private ZoneManager zoneManager;
 
     private Bobber bobber;
 
@@ -36,6 +39,7 @@ public class GameManager : MonoBehaviour
         environmentManager = GameObject.FindWithTag("EnvironmentManager").GetComponent<EnvironmentManager>();
         itemManager = GameObject.FindWithTag("ItemManager").GetComponent <ItemManager>();
         bobber = GameObject.FindWithTag("Bobber").GetComponent<Bobber>();
+        zoneManager = GameObject.FindWithTag("ZoneManager").GetComponent<ZoneManager>();
     }
 
     // Update is called once per frame
@@ -108,6 +112,7 @@ public class GameManager : MonoBehaviour
     {
         // Called when new game / load game button is pressed
         player = Instantiate(playerPrefab);
+        inventory = player.GetComponent<Inventory>();
         dataManager.SetPlayer(player);
         dataManager.Load();
     }
@@ -192,6 +197,23 @@ public class GameManager : MonoBehaviour
     public Season GetCurrentSeason()
     {
         return currentSeason;
+    }
+
+    public void UnlockZone(int zoneId)
+    {
+        var zone = zoneManager.GetZoneById(zoneId);
+
+        // Can player afford?
+        if (inventory.GetMoney() >= zone.cost)
+        {
+            // They can
+            inventory.DeltaMoney(-zone.cost);
+            zoneManager.UnlockZone(zoneId);
+        }
+        else
+        {
+            Debug.Log("Can't afford zone");
+        }
     }
 }
 
