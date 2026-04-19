@@ -112,7 +112,5 @@ public class Inventory : Container
         {
             RemoveStack(stack);
         }
-
-        Debug.Log($"Sold {itemId} for {stack.item.value}");
     }
 }

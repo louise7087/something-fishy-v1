@@ -167,8 +167,6 @@ public class MarketplaceUI : MonoBehaviour
 
         if (stack == null) return;
 
-        Debug.Log($"Trying to sell {stack.item.id}");
-
         inventory.SellItem(stack.item.id);
 
         RefreshInventory();
