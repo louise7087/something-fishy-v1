@@ -72,105 +72,105 @@ MonoBehaviour:
   - name: Banded Butterfly Fish
     id: fish.bandedbutterflyfish
     value: 13
-    maxStack: 1
+    maxStack: 3
     prefab: {fileID: 4559402820569807666, guid: e1b93b1239536794394f75f16b74dfd3, type: 3}
     season: 1
     difficulty: 2
   - name: Atlantic Bass
     id: fish.atlanticbass
     value: 25
-    maxStack: 1
+    maxStack: 3
     prefab: {fileID: 5770250390251273812, guid: 51b270b7d83ec3d4babc62b7574cc5f1, type: 3}
     season: 1
     difficulty: 4
   - name: Bluetang
     id: fish.bluetang
     value: 5
-    maxStack: 1
+    maxStack: 3
     prefab: {fileID: 3406353810486387946, guid: 3629cfb0f65965148a1a7bb7b4e9df8c, type: 3}
     season: 1
     difficulty: 1
   - name: Pollock
     id: fish.pollock
     value: 8
-    maxStack: 1
+    maxStack: 3
     prefab: {fileID: 8807951744595679128, guid: 8d0d9208f2c3ff94ab169ff0c5bcffc8, type: 3}
     season: 1
     difficulty: 1
   - name: Ballan Wrasse
     id: fish.ballanwrasse
     value: 15
-    maxStack: 1
+    maxStack: 3
     prefab: {fileID: 6882464991245428160, guid: e2ee6263022e27346ba5ee0cbb0ed20e, type: 3}
     season: 1
     difficulty: 3
   - name: Weaver
     id: fish.weaver
     value: 5
-    maxStack: 1
+    maxStack: 3
     prefab: {fileID: 2459310890065183381, guid: af07efeb68ef7c847b7cd9caff600a86, type: 3}
     season: 1
     difficulty: 1
   - name: Bream
     id: fish.bream
     value: 5
-    maxStack: 1
+    maxStack: 3
     prefab: {fileID: 5104418503420899263, guid: d6b0754113a98c14b9678c50b9f2e987, type: 3}
     season: 1
     difficulty: 1
   - name: Pufferfish
     id: fish.pufferfish
     value: 20
-    maxStack: 1
+    maxStack: 3
     prefab: {fileID: 6301473946630696010, guid: eec1ec7b0256ad74f8eb342259cbabb2, type: 3}
     season: 1
     difficulty: 4
   - name: Cod
     id: fish.cod
     value: 10
-    maxStack: 1
+    maxStack: 3
     prefab: {fileID: 7878240941487033905, guid: 21f4c0ad9127ac34fa7f52e4bb723d98, type: 3}
     season: 2
     difficulty: 2
   - name: Dab
     id: fish.dab
     value: 8
-    maxStack: 1
+    maxStack: 3
     prefab: {fileID: 6594886011999412278, guid: b2343b9abeaf6ac4bb2440b1d4f6e47a, type: 3}
     season: 2
     difficulty: 1
   - name: Flounder
     id: fish.flounder
     value: 10
-    maxStack: 1
+    maxStack: 3
     prefab: {fileID: 5586524491635485801, guid: 8fd7b6a2cd2867243a74d910d8c02c1b, type: 3}
     season: 2
     difficulty: 2
   - name: Whiting
     id: fish.whiting
     value: 5
-    maxStack: 1
+    maxStack: 3
     prefab: {fileID: 5712324454314582395, guid: af9e04d72b2932844b37a9d5d870d9bb, type: 3}
     season: 2
     difficulty: 1
   - name: Halibut
     id: fish.halibut
     value: 20
-    maxStack: 1
+    maxStack: 3
     prefab: {fileID: 458887701512274171, guid: be9c1f96e74769842bc42f462510dc01, type: 3}
     season: 2
     difficulty: 4
   - name: Herring
     id: fish.herring
     value: 8
-    maxStack: 1
+    maxStack: 3
     prefab: {fileID: 1758601393667813303, guid: 09dcf9faebb082a47a86a074dc652d81, type: 3}
     season: 2
     difficulty: 1
   - name: Stingray
     id: fish.stingray
     value: 25
-    maxStack: 1
+    maxStack: 3
     prefab: {fileID: 1147930302317490192, guid: 2946ccb2c7205be41a902ef6c4d9b102, type: 3}
     season: 2
     difficulty: 4
