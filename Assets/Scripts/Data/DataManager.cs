@@ -98,7 +98,8 @@ public class DataManager : MonoBehaviour
         var saveService = new SavePlayerProgressService(
             new PlayerRepository(dbPath),
             new InventoryRepository(dbPath),
-            new WalletRepository(dbPath)
+            new WalletRepository(dbPath),
+            new UnlockRepository(dbPath)
         );
 
         var save = new PlayerSaveModel
@@ -114,6 +115,12 @@ public class DataManager : MonoBehaviour
                 ItemDefinitionKey = stack.item.id,
                 Quantity = stack.amount,
                 SlotIndex = stack.position,
+            }).ToList(),
+            Unlocks = zoneManager.GetUnlockedZoneIds().Select(zone => new UnlockModel
+            {
+                UnlockDefinitionKey = zone,
+                UnlockType = "unlocked"
+
             }).ToList()
         };
 
@@ -160,11 +167,39 @@ public class DataManager : MonoBehaviour
 
         var marketRepo = new MarketPriceRepository(dbPath);
 
+        var refreshMarketService = new RefreshMarketPricesService(marketRepo);
         var sellFishService = new SellFishToMarketService(marketRepo);
 
-        var price = await sellFishService.loadFishPrice(itemId);
+        await refreshMarketService.RefreshOnIntervalAsync(gameManager.getCurrentSeason());
 
+        var price = await sellFishService.loadFishPrice(itemId);
         return price;
+    }
+
+    public async Task LoadUnlockedZones()
+    {
+        if (ActivePlayerSession.CurrentPlayerId == null)
+        {
+            Debug.LogError("No active player session found, cannot load zones");
+            return;
+        }
+
+        List<string> zoneIds = new List<string>();
+
+        var dbPath = DbPathProvider.GetDatabasePath();
+
+        var UnlockRepo = new UnlockRepository(dbPath);
+       
+        var playerId = ActivePlayerSession.CurrentPlayerId.Value;
+
+        var zones = await UnlockRepo.GetByPlayerIdAsync(playerId);
+
+        foreach (var zone in zones) 
+        {
+            zoneIds.Add(zone.UnlockDefinitionKey);
+        }
+        
+        zoneManager.UnlockZones(zoneIds);
     }
 }
 

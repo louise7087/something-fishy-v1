@@ -115,6 +115,7 @@ public class GameManager : MonoBehaviour
         inventory = player.GetComponent<Inventory>();
         dataManager.SetPlayer(player);
         dataManager.Load();
+        dataManager.LoadUnlockedZones();
     }
 
     public void NewGame()
@@ -199,7 +200,7 @@ public class GameManager : MonoBehaviour
         return currentSeason;
     }
 
-    public void UnlockZone(int zoneId)
+    public void UnlockZone(string zoneId)
     {
         var zone = zoneManager.GetZoneById(zoneId);
 
@@ -214,6 +215,11 @@ public class GameManager : MonoBehaviour
         {
             Debug.Log("Can't afford zone");
         }
+    }
+
+    public Season getCurrentSeason()
+    {
+        return currentSeason;
     }
 }
 

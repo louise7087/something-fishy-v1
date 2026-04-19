@@ -9,12 +9,14 @@ public class SavePlayerProgressService
     private readonly PlayerRepository _playerRepository;
     private readonly InventoryRepository _inventoryRepository;
     private readonly WalletRepository _walletRepository;
+    private readonly UnlockRepository _unlockRepository;
 
-    public SavePlayerProgressService(PlayerRepository playerRepository, InventoryRepository inventoryRepository, WalletRepository walletRepository)
+    public SavePlayerProgressService(PlayerRepository playerRepository, InventoryRepository inventoryRepository, WalletRepository walletRepository, UnlockRepository unlockRepository)
     {
         _playerRepository = playerRepository;
         _inventoryRepository = inventoryRepository;
         _walletRepository = walletRepository;
+        _unlockRepository = unlockRepository;
     }
     public async Task SavePlayerProgressAsync(PlayerSaveModel playerSave)
     {
@@ -102,6 +104,29 @@ public class SavePlayerProgressService
             };
 
             await _inventoryRepository.AddAsync(inventoryItem);
+        }
+
+        var existingUnlocks = await _unlockRepository.GetByPlayerIdAsync(playerSave.PlayerId);
+
+        foreach (var unlock in existingUnlocks)
+        {
+            await _inventoryRepository.DeleteAsync(unlock.UnlockId);
+        }
+
+        foreach (var unlock in playerSave.Unlocks) 
+        {
+            var unlockedZone = new UnlockEntity
+            {
+                UnlockId = unlock.UnlockId == Guid.Empty
+                    ? Guid.NewGuid()
+                    : unlock.UnlockId,
+                PlayerId = playerSave.PlayerId,
+                UnlockDefinitionKey = unlock.UnlockDefinitionKey,
+                UnlockType = unlock.UnlockType,
+                UnlockedUtc = now,
+            };
+
+            await _unlockRepository.AddAsync(unlockedZone);
         }
     }
 }

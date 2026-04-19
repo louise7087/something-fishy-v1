@@ -2,9 +2,9 @@ using UnityEngine;
 
 public class Zone : MonoBehaviour
 {
-    [SerializeField] private int id;
+    [SerializeField] private string id;
 
-    public int GetId()
+    public string GetId()
     {
         return id;
     }
