@@ -1,7 +1,11 @@
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
+using System;
+using System.Linq;
 using Newtonsoft.Json;
+using Microsoft.EntityFrameworkCore;
+
 
 public class DataManager : MonoBehaviour
 {
@@ -10,18 +14,18 @@ public class DataManager : MonoBehaviour
 
     private GameManager gameManager;
 
-     private const string INVENTORY_PATH = "/inventory.json";
+    private const string INVENTORY_PATH = "/inventory.json";
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     private void Awake()
@@ -35,31 +39,112 @@ public class DataManager : MonoBehaviour
         inventory = player.GetComponent<Inventory>();
     }
 
-    public void Load()
+    public async void Load()
     {
-        Debug.Log("Loading Data");
+        var dbPath = DbPathProvider.GetDatabasePath();
+
+        using (var db = new GameDbContext(dbPath))
+        {
+            db.Database.EnsureCreated();
+        }
+
+        var playerRepository = new PlayerRepository(dbPath);
+        var loadService = new LoadPlayerService(playerRepository);
+
+        var result = await loadService.LoadorCreateLocalPlayerAsync();
+        var save = result.Player;
+
+        inventory.SetMoney(save.BalanceMinorUnits);
+
+        var stacks = new List<ItemStack>();
+
+        foreach (var itemStack in save.InventoryItems)
+        {
+            var item = gameManager.GetItemManager().GetItemById(itemStack.ItemDefinitionKey);
+
+            if (item != null)
+            {
+                stacks.Add(new ItemStack(item, itemStack.SlotIndex, itemStack.Quantity));
+            }
+            else
+            {
+                Debug.LogWarning($"Could not find item with id {itemStack.ItemDefinitionKey} in item manager");
+                continue;
+            }
+        }
+
+        inventory.SetItems(stacks);
+
         LoadPosition();
-        LoadInventory();
-        LoadMoney();
-        LoadTime();
     }
 
-    public void Save()
+    public async void Save()
     {
-        SavePosition(); 
-        SaveInventory();
-        SaveMoney();
-        SaveTime();
+        if (player == null || inventory == null)
+        {
+            Debug.LogWarning("No active player to save.");
+            return;
+        }
+
+        SavePosition();
+
+        if (ActivePlayerSession.CurrentPlayerId == null)
+        {
+            Debug.LogError("No active player session found, cannot save");
+            return;
+        }
+
+        string dbPath = DbPathProvider.GetDatabasePath();
+
+        using (var db = new GameDbContext(dbPath))
+        {
+            db.Database.EnsureCreated();
+        }
+
+        var saveService = new SavePlayerProgressService(
+            new PlayerRepository(dbPath),
+            new InventoryRepository(dbPath),
+            new WalletRepository(dbPath)
+        );
+
+        var save = new PlayerSaveModel
+        {
+            PlayerId = ActivePlayerSession.CurrentPlayerId.Value,
+            DisplayName = "Player",
+            ProgressionLevel = 0,
+            CurrentAreaKey = "starter_area",
+            EquippedToolKey = "basic_rod",
+            BalanceMinorUnits = inventory.GetMoney(),
+            InventoryItems = inventory.GetItems().Select(stack => new InventoryItemModel
+            {
+                ItemDefinitionKey = stack.item.id,
+                Quantity = stack.amount,
+                SlotIndex = stack.position,
+            }).ToList()
+        };
+
+        await saveService.SavePlayerProgressAsync(save);
+
         PlayerPrefs.Save();
     }
 
     private void LoadPosition()
     {
+        if (player == null)
+        {
+            return;
+        }
+
         player.transform.position = new Vector2(PlayerPrefs.GetFloat("playerPosX"), PlayerPrefs.GetFloat("playerPosY"));
     }
 
     private void SavePosition()
     {
+        if (player == null)
+        {
+            return;
+        }
+
         PlayerPrefs.SetFloat("playerPosX", player.transform.position.x);
         PlayerPrefs.SetFloat("playerPosY", player.transform.position.y);
     }
@@ -94,7 +179,7 @@ public class DataManager : MonoBehaviour
         List<ItemStack> stacks = inventory.GetItems();
         List<ItemStackWrapper> wrappedStacks = new List<ItemStackWrapper>();
 
-        foreach(ItemStack stack in stacks)
+        foreach (ItemStack stack in stacks)
         {
             ItemStackWrapper wrappedStack = new ItemStackWrapper(stack.item.id, stack.position, stack.amount);
             wrappedStacks.Add(wrappedStack);
@@ -114,24 +199,12 @@ public class DataManager : MonoBehaviour
         PlayerPrefs.SetInt("money", inventory.GetMoney());
     }
 
-    private void LoadTime()
-    {
-        gameManager.SetCurrentSeason((Season)PlayerPrefs.GetInt("season"));
-        gameManager.SetCurrentSeasonTime(PlayerPrefs.GetFloat("time"));
-    }
-
-    private void SaveTime()
-    {
-        PlayerPrefs.SetInt("season", (int)gameManager.GetCurrentSeason());
-        PlayerPrefs.SetFloat("time", gameManager.GetCurrentSeasonTime());
-    }
-
     public void WipeSave()
     {
         PlayerPrefs.DeleteAll();
         PlayerPrefs.Save();
 
-        if(File.Exists(Application.persistentDataPath + INVENTORY_PATH))
+        if (File.Exists(Application.persistentDataPath + INVENTORY_PATH))
         {
             File.Delete(Application.persistentDataPath + INVENTORY_PATH);
         }

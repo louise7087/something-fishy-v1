@@ -40,16 +40,16 @@ public class RefreshMarketPricesService
     {
         switch (season)
         {
-            case Season.SPRING:
+            case Season.Spring:
                 return fishId == "salmon" ? 1.2f : 1.0f;
 
-            case Season.SUMMER:
+            case Season.Summer:
                 return fishId == "tuna" ? 1.3f : 1.0f;
 
-            case Season.FALL:
+            case Season.Autumn:
                 return fishId == "carp" ? 1.2f : 1.0f;
 
-            case Season.WINTER:
+            case Season.Winter:
                 return fishId == "cod" ? 1.3f : 1.0f;
 
             default:
