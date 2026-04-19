@@ -1,20 +1,4 @@
-﻿// ============================================================
-// File: TransactionEntity.cs
-// Purpose:
-// Represents the database row/entity used to persist a single
-// economy or market transaction record.
-//
-// Responsibilities:
-// - Store transaction history in SQLite
-// - Represent persisted credits, debits, sales, or purchases
-// - Support auditability and history tracking
-//
-// Notes:
-// - Persistence model only
-// - Keep transactional rule validation outside this entity
-// ============================================================
-
-using System;
+﻿using System;
 
 public sealed class TransactionEntity
 {
