@@ -23,6 +23,7 @@ public class ZoneDatabase : ScriptableObject
 [System.Serializable]
 public class ZoneEntry
 {
+    public string name;
     public int zone;
     public int cost;
     public GameObject prefab;

@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Zone Database
   m_EditorClassIdentifier: Assembly-CSharp::ZoneDatabase
   items:
-  - zone: 1
+  - name: second_area
+    zone: 1
     cost: 50
     prefab: {fileID: 6584260598263958601, guid: 4aaaa9956bd07ae48902acd4bf4e5018, type: 3}
