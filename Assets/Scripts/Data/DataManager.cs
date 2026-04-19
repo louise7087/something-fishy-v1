@@ -153,7 +153,7 @@ public class DataManager : MonoBehaviour
     public int GetItemPrice(string itemId)
     {
 
-        return 10;
+        return -1;
     }
 }
 

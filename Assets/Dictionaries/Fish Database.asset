@@ -20,13 +20,6 @@ MonoBehaviour:
     prefab: {fileID: 7425973434950967351, guid: 78e4b8ef11bf94c489ac47d0fe7e219c, type: 3}
     season: 0
     difficulty: 3
-  - name: Mackerel
-    id: fish.mackerel
-    value: 5
-    maxStack: 3
-    prefab: {fileID: 6556336693574479598, guid: 0420980ff93b94e49a1820e8c2c7fc50, type: 3}
-    season: 0
-    difficulty: 1
   - name: Clownfish
     id: fish.clownfish
     value: 8
@@ -253,8 +246,15 @@ MonoBehaviour:
     difficulty: 2
   - name: Anglerfish
     id: fish.anglerfish
-    value: 30
+    value: 10
     maxStack: 5
     prefab: {fileID: 6480690540276823468, guid: e5030b20b67e9104cad6a4fb7c3d9d00, type: 3}
     season: 4
     difficulty: 4
+  - name: Mackerel
+    id: fish.mackerel
+    value: 5
+    maxStack: 3
+    prefab: {fileID: 6556336693574479598, guid: 0420980ff93b94e49a1820e8c2c7fc50, type: 3}
+    season: 0
+    difficulty: 1

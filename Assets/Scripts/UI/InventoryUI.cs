@@ -64,6 +64,8 @@ public class InventoryUI : MonoBehaviour
 
     private void RefreshInventory()
     {
+        inventory.RefreshItemValues();
+
         var root = uiDocument.rootVisualElement;
 
         imageSlots = new Image[inventory.GetCapacity()];
