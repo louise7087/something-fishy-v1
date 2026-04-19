@@ -131,6 +131,24 @@ public class InventoryUI : MonoBehaviour
         }
     }
 
+    public void Open()
+    {
+        if (isOpen) return;
+
+        isOpen = true;
+        uiDocument.enabled = true;
+        RefreshInventory();
+    }
+
+    public void Close()
+    {
+        if (!isOpen) return;
+
+        isOpen = false;
+        uiDocument.enabled = false;
+        HideItemInfo();
+    }
+
     private void OnInventoryButtonClicked(int index)
     {
         inventory.EquipItemAtIndex(index);

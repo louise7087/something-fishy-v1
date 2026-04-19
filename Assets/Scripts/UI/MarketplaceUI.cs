@@ -161,6 +161,26 @@ public class MarketplaceUI : MonoBehaviour
         }
     }
 
+    public void Open()
+    {
+        if (isOpen) return;
+
+        isOpen = true;
+        uiDocument.enabled = true;
+        SetupUI();
+        RefreshInventory();
+    }
+
+    public void Close()
+    {
+        if (!isOpen) return;
+
+        isOpen = false;
+        DeregisterButtons();
+        HideItemInfo();
+        uiDocument.enabled = false;
+    }
+
     private void OnInventoryButtonClicked(int index)
     {
         var stack = stacks.FirstOrDefault(i => i.position == index);

@@ -10,6 +10,7 @@ public class PlayerControls : MonoBehaviour
     [Header("Movement Settings")]
     [SerializeField] private float speed = 5f;
     [SerializeField] public bool lockMovement;
+    [SerializeField] private float distanceToMarketplace = 10f;
 
     [Header("Input Settings")]
     [SerializeField] InputActionReference moveReference;
@@ -31,6 +32,7 @@ public class PlayerControls : MonoBehaviour
     private Vector2 currentInput;
     private Vector2 facingDirection;
 
+
     private bool isMoving;
     private bool isFishing;
 
@@ -39,6 +41,8 @@ public class PlayerControls : MonoBehaviour
     private Camera mainCamera;
 
     private Bobber bobber;
+
+    private Transform marketplace;
 
     private void Awake()
     {
@@ -57,6 +61,7 @@ public class PlayerControls : MonoBehaviour
         inventoryUI = GameObject.FindWithTag("InventoryUI").GetComponent<InventoryUI>();
         marketplaceUI = GameObject.FindWithTag("MarketplaceUI").GetComponent<MarketplaceUI>();
         bobber = GameObject.FindWithTag("Bobber").GetComponent<Bobber>();
+        marketplace = GameObject.FindWithTag("Marketplace").transform;
 
         inventoryUI.Init();
         marketplaceUI.Init();
@@ -75,6 +80,18 @@ public class PlayerControls : MonoBehaviour
 
     private void Update()
     {
+        Vector2 differenceToMarketplace = (Vector2)(marketplace.position - transform.position);
+
+        if(differenceToMarketplace.sqrMagnitude < distanceToMarketplace * distanceToMarketplace)
+        {
+            inventoryUI.Close();
+            marketplaceUI.Open();
+        }
+        else
+        {
+            marketplaceUI.Close();
+        }
+
         if (fireReference.action.WasPressedThisFrame())
         {
             Fire();
