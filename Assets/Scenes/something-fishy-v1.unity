@@ -25176,7 +25176,7 @@ MonoBehaviour:
   fishGameChance: 0.5
   minTimeBetweenAttempts: 4
   maxAllowedFails: 6
-  seasonLengthSeconds: 60
+  seasonLengthSeconds: 600
   currentSeason: 0
   playerPrefab: {fileID: 2251506983071031958, guid: 01f90909d1180424292a084f7a7d6d6c, type: 3}
 --- !u!1 &1546939656
