@@ -7,7 +7,6 @@ public class ZoneManager : MonoBehaviour
     [SerializeField] private ZoneDatabase zoneDatabase;
 
     private List<string> unlockedZoneIds = new List<string>();
-    private List<string> unlockedZoneIds = new List<string>();
 
     private Dictionary<string, GameObject> lockedZonesGameObjects = new Dictionary<string, GameObject>();
 
@@ -24,7 +23,6 @@ public class ZoneManager : MonoBehaviour
     }
 
     public void UnlockZone(string zoneId)
-    public void UnlockZone(string zoneId)
     {
         Destroy(lockedZonesGameObjects[zoneId]);
         lockedZonesGameObjects.Remove(zoneId);
@@ -34,9 +32,7 @@ public class ZoneManager : MonoBehaviour
     }
 
     public void UnlockZones(List<string> zoneIds)
-    public void UnlockZones(List<string> zoneIds)
     {
-        foreach (string zoneId in zoneIds)
         foreach (string zoneId in zoneIds)
         {
             UnlockZone(zoneId);
@@ -44,13 +40,12 @@ public class ZoneManager : MonoBehaviour
     }
 
     public List<string> GetUnlockedZoneIds()
-    public List<string> GetUnlockedZoneIds()
     {
         return unlockedZoneIds;
     }
 
     public ZoneEntry GetZoneById(string zoneId)
     {
-        return zoneDatabase.GetZoneByName(zoneId);
+        return zoneDatabase.GetZoneById(zoneId);
     }
 }

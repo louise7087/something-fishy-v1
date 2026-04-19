@@ -201,7 +201,7 @@ public class GameManager : MonoBehaviour
 
     public void UnlockZone(string zoneId)
     {
-        var zone = zoneManager.GetZoneByName(zoneId);
+        var zone = zoneManager.GetZoneById(zoneId);
 
         // Can player afford?
         if (inventory.GetMoney() >= zone.cost)
