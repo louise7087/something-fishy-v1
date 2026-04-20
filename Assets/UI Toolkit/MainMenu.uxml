@@ -1,0 +1,11 @@
+<ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <ui:VisualElement style="flex-grow: 1; justify-content: center; background-image: url(&quot;project://database/Assets/Assets/Images/background.png?fileID=2800000&amp;guid=c9cfeb9df638e524fad5211661b23d96&amp;type=3#background&quot;); background-size: 100% 120%; background-position-x: center;">
+        <ui:GroupBox style="align-items: center; justify-content: center; align-self: auto; align-content: auto; margin-top: 2px; width: auto; height: auto; aspect-ratio: auto;">
+            <ui:Image source="project://database/Assets/Assets/Images/logo.png?fileID=2800000&amp;guid=60639280583812e458e48d11f0b8a5ca&amp;type=3#logo" name="ImageLogo" style="margin-bottom: 0; width: auto; height: 31%; margin-top: 0;"/>
+            <ui:Button text="New Game" name="ButtonNewGame" style="width: 20%; margin-top: 7px; margin-bottom: 7px;"/>
+            <ui:Button text="Load Game" name="ButtonLoadGame" style="width: 20%; margin-top: 7px; margin-bottom: 7px;"/>
+            <ui:Button text="Settings" name="ButtonSettings" style="width: 20%; margin-top: 7px; margin-bottom: 7px;"/>
+            <ui:Button text="Quit" name="ButtonQuit" style="width: 20%; margin-top: 7px; margin-bottom: 7px;"/>
+        </ui:GroupBox>
+    </ui:VisualElement>
+</ui:UXML>
