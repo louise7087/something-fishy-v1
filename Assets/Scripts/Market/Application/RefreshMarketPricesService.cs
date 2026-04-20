@@ -7,7 +7,7 @@ public class RefreshMarketPricesService
 {
     private readonly MarketPriceRepository _marketPriceRepository;
     private const string LAST_MARKET_REFRESH_KEY = "lastMarketRefreshUtc";
-    private static readonly TimeSpan RefreshInterval = TimeSpan.FromMinutes(1);
+    private static readonly TimeSpan RefreshInterval = TimeSpan.FromMinutes(5);
     public RefreshMarketPricesService(MarketPriceRepository marketPriceRepository)
     {
         _marketPriceRepository = marketPriceRepository;
