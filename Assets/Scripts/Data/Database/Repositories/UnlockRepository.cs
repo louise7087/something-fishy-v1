@@ -14,11 +14,12 @@
 // - Unlock conditions and gating logic belong elsewhere
 // ============================================================
 
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
+using static Unity.Collections.AllocatorManager;
 
 public class UnlockRepository
 {
@@ -35,10 +36,23 @@ public class UnlockRepository
             .Where (u => u.PlayerId == playerId)
             .ToListAsync();
     }
+
     public async Task AddAsync(UnlockEntity unlock) 
     { 
         await using var db = new GameDbContext(_databasePath);
         await db.Unlocks.AddAsync(unlock);
         await db.SaveChangesAsync();
+    }
+
+    public async Task DeleteAsync(Guid id) 
+    {
+        await using var db = new GameDbContext(_databasePath);
+        var entity = await db.Unlocks.FirstOrDefaultAsync(i => i.UnlockId == id);
+        if (entity != null)
+        {
+            db.Unlocks.Remove(entity);
+            await db.SaveChangesAsync();
+        }
+        else { return; }
     }
 }

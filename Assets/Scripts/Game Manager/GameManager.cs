@@ -114,6 +114,7 @@ public class GameManager : MonoBehaviour
         inventory = player.GetComponent<Inventory>();
         dataManager.SetPlayer(player);
         dataManager.Load();
+        dataManager.LoadUnlockedZones();
     }
 
     public void NewGame()
@@ -200,7 +201,7 @@ public class GameManager : MonoBehaviour
 
     public void UnlockZone(string zoneId)
     {
-        var zone = zoneManager.GetZoneByName(zoneId);
+        var zone = zoneManager.GetZoneById(zoneId);
 
         // Can player afford?
         if (inventory.GetMoney() >= zone.cost)
@@ -213,6 +214,11 @@ public class GameManager : MonoBehaviour
         {
             Debug.Log("Can't afford zone");
         }
+    }
+
+    public Season getCurrentSeason()
+    {
+        return currentSeason;
     }
 }
 

@@ -10,7 +10,7 @@ public class ZoneManager : MonoBehaviour
 
     private Dictionary<string, GameObject> lockedZonesGameObjects = new Dictionary<string, GameObject>();
 
-    private void Start()
+    private async void Start()
     {
         zoneDatabase.Init();
 
@@ -19,7 +19,6 @@ public class ZoneManager : MonoBehaviour
         {
             lockedZonesGameObjects.Add(zoneEntry.id, Instantiate(zoneEntry.prefab));
         }
-
         Debug.Log("Spawned all zones");
     }
 
@@ -45,8 +44,8 @@ public class ZoneManager : MonoBehaviour
         return unlockedZoneIds;
     }
 
-    public ZoneEntry GetZoneByName(string zoneId)
+    public ZoneEntry GetZoneById(string zoneId)
     {
-        return zoneDatabase.GetZoneByName(zoneId);
+        return zoneDatabase.GetZoneById(zoneId);
     }
 }

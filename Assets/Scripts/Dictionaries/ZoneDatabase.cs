@@ -14,7 +14,7 @@ public class ZoneDatabase : ScriptableObject
         lookup = items.ToDictionary(i => i.id, i => i);
     }
 
-    public ZoneEntry GetZoneByName(string zone)
+    public ZoneEntry GetZoneById(string zone)
     {
         return lookup[zone];
     }
@@ -23,6 +23,7 @@ public class ZoneDatabase : ScriptableObject
 [System.Serializable]
 public class ZoneEntry
 {
+    public string name;
     public string id;
     public int cost;
     public GameObject prefab;
