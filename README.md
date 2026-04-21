@@ -51,14 +51,14 @@ something-fishy-v1/
 
 ## Run Locally
 
-# Option 1: Run from Unity
+### Option 1: Run from Unity
 
 1. Open the project in Unity Hub
 2. Use the correct Unity version for the project
 3. Open the main gameplay scene
 4. Press Play
 
-# Option 2: Run from relase
+### Option 2: Run from relase
 
 1. Download from the latest release build
 2. Extract the files
@@ -66,5 +66,5 @@ something-fishy-v1/
 
 ## Release
 
-# Latest release:
+### Latest release:
 - Something Fishy 1.0
