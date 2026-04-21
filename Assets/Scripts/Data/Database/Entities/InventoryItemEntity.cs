@@ -1,20 +1,4 @@
-﻿// ============================================================
-// File: InventoryItemEntity.cs
-// Purpose:
-// Represents the database row/entity used to persist an item
-// stored in a player or container inventory.
-//
-// Responsibilities:
-// - Store persisted inventory item data
-// - Represent item identity, quantity, and ownership/location
-// - Support loading and saving inventory state in SQLite
-//
-// Notes:
-// - Persistence model only
-// - Keep storage structure separate from domain inventory logic
-// ============================================================
-
-using System;
+﻿using System;
 
 public sealed class InventoryItemEntity
 {

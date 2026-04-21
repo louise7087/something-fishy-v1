@@ -1,19 +1,3 @@
-// ============================================================
-// File: PlayerEntity.cs
-// Purpose:
-// Represents the database row/entity used to persist a player
-// and their associated data.
-//
-// Responsibilities:
-// - Store persisted player data
-// - Represent player identity, progression, and associated entities
-// - Support loading and saving player state in SQLite
-//
-// Notes:
-// - Persistence model only
-// - Keep storage structure separate from domain player logic
-// ============================================================
-
 using System;
 using System.Collections.Generic;
 

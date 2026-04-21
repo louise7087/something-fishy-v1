@@ -1,20 +1,4 @@
-﻿// ============================================================
-// File: UnlockEntity.cs
-// Purpose:
-// Represents the database row/entity used to persist player
-// progression unlocks such as world areas or gated content.
-//
-// Responsibilities:
-// - Store persisted unlock state
-// - Represent which progression gates have been unlocked
-// - Support loading and saving unlock progression in SQLite
-//
-// Notes:
-// - Persistence model only
-// - Unlock requirements and validation belong elsewhere
-// ============================================================
-
-using System;
+﻿using System;
 
 public sealed class UnlockEntity
 {

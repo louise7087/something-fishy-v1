@@ -1,20 +1,4 @@
-﻿// ============================================================
-// File: UpgradeOwnershipEntity.cs
-// Purpose:
-// Represents the database row/entity used to persist player
-// upgrade ownership or upgrade progression state.
-//
-// Responsibilities:
-// - Store persisted upgrade data
-// - Represent owned or unlocked upgrades in SQLite
-// - Support loading and saving upgrade progression
-//
-// Notes:
-// - Persistence model only
-// - Upgrade effects and purchase rules belong in domain/services
-// ============================================================
-
-using System;
+﻿using System;
 
 public sealed class UpgradeOwnershipEntity
 {
