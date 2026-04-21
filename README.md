@@ -1,6 +1,6 @@
 # Something Fishy
 
-Unity-based fihsing and market simulation game built around catching fish, inventory management and progressing through the world.
+Unity-based fishing and market simulation game built around catching fish, inventory management and progressing through the world.
 
 ## Structure
 
